@@ -1,0 +1,22 @@
+Steps:
+1. Docker compose up docker-compose file
+
+2. Run shop.py to:
+    - connect with Milvus
+    - insert data
+
+3. Run metodi.py to:
+    - run queries/methods [fastapi app, running on http://127.0.0.1:8000/]
+    - /test-milvus-connection/
+    - /get-entity-count/
+    - /api/v1/collections/onlineshop/getvector1/450078043232800151
+    - /api/v1/collections/onlineshop/query
+        * use of LIKE op. description LIKE 'Ne%'
+    - /api/v1/search/ + body as key-value in form: search_term-[optional, ex. 'ne'/'nest']
+        * vector search
+    
+4. [Optional] Running Attu (GUI for Milvus)
+> docker run --name attu -p 8000:3000 -e HOST_URL=http://xxx.xxx.x.x:8000 -e MILVUS_URL=http://xxx.xxx.x.x:19530 zilliz/attu:latest
+
+* how to find http://xxx.xxx.x.x: 
+> ipconfig

@@ -1,0 +1,9 @@
+
+.metadata/*
+/.metadata/
+
+.idea/*
+/.idea/
+
+**/env/
+**/volumes/
