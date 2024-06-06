@@ -9,6 +9,9 @@ from py_eureka_client import eureka_client
 from typing import List, Dict
 import logging
 import uvicorn
+import warnings
+
+warnings.filterwarnings("ignore", category=FutureWarning, message=".*resume_download.*")
 
 app = FastAPI()
 
