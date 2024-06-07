@@ -1,5 +1,6 @@
 import configs.env as env
-from pymilvus import connections, Collection, MilvusClient
+from pymilvus import Collection, MilvusClient, connections
+
 
 def connect_to_milvus():
     connections.connect(host=env.MILVUS_HOST, port=env.MILVUS_PORT)

@@ -1,10 +1,12 @@
 import csv
-import numpy as np
-import configs.env as env
-from langchain_text_splitters import SentenceTransformersTokenTextSplitter
-from sentence_transformers import SentenceTransformer
-from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 import warnings
+
+import configs.env as env
+import numpy as np
+from langchain_text_splitters import SentenceTransformersTokenTextSplitter
+from pymilvus import (Collection, CollectionSchema, DataType, FieldSchema,
+                      connections, utility)
+from sentence_transformers import SentenceTransformer
 
 warnings.filterwarnings("ignore", category=FutureWarning, message=".*resume_download.*")
 

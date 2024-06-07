@@ -1,4 +1,3 @@
-import uvicorn
 import configs.env as env
 from fastapi import APIRouter
 from services.milvus_service import client
