@@ -2,6 +2,8 @@ import csv
 import warnings
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 from sentence_transformers import SentenceTransformer
+from langchain_text_splitters import SentenceTransformersTokenTextSplitter
+import strip_markdown
 
 warnings.filterwarnings("ignore", category=FutureWarning, message=".*resume_download.*")
 
@@ -23,15 +25,16 @@ def drop_collection_if_exists(collection_name):
 
 def create_collection_schema():
     fields = [
-        FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=False),
+        FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=True),
         FieldSchema(name='name', dtype=DataType.VARCHAR, max_length=255),
         FieldSchema(name='content', dtype=DataType.VARCHAR, max_length=20000),
         FieldSchema(name='difficulty', dtype=DataType.INT32),
         FieldSchema(name='min_recommended_age', dtype=DataType.INT32),
         FieldSchema(name='max_recommended_age', dtype=DataType.INT32),
         FieldSchema(name='creator_id', dtype=DataType.INT64),
+        FieldSchema(name='chunk_id', dtype=DataType.INT32),
         FieldSchema(name='name_emb', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION),
-        FieldSchema(name='content_emb', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
+        FieldSchema(name='content_emb', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION),
     ]
     return CollectionSchema(fields)
 
@@ -45,19 +48,29 @@ def create_collection(collection_name, schema):
     print('Collection created and indices created')
     return collection
 
-def csv_load(file_path, encoding='utf-8'):
+def csv_load(file_path, splitter, chunk_size=256, encoding='utf-8'):
     with open(file_path, 'r', encoding=encoding, newline='') as file:
         reader = csv.reader(file, delimiter=',')
         next(reader)
+        data_chunk = []
         for row in reader:
-            if '' in (row[0], row[1], row[2], row[3], row[4], row[5], row[6]):
+            if len(row) < 6 or '' in (row[0], row[1], row[2], row[3], row[4], row[5]):
                 continue
-            yield (row[0], row[1], row[2], row[3], row[4], row[5], row[6])
+            name, content, difficulty, min_recommended_age, max_recommended_age, creator_id = row[0], row[1], row[2], row[3], row[4], row[5]
+            split_result = splitter.split_text(text=strip_markdown.strip_markdown(content))
+            chunk_id = 1 
+            for chunk in split_result:
+                data_chunk.append((name, chunk, difficulty, min_recommended_age, max_recommended_age, creator_id, chunk_id))
+                chunk_id += 1
+                if len(data_chunk) >= chunk_size:
+                    yield data_chunk
+                    data_chunk = []
+        if data_chunk:
+            yield data_chunk
 
 def embed_insert(collection, data_batch, transformer):
-    name_embeds = transformer.encode(data_batch[1])
-    # descr_plain_text = ''.join(markdown2.markdown(data_batch[2]).splitlines())
-    descr_embeds = transformer.encode(data_batch[2])
+    name_embeds = transformer.encode(data_batch[0])
+    descr_embeds = transformer.encode(data_batch[1])
     ins = [
         data_batch[0], data_batch[1], data_batch[2], data_batch[3], data_batch[4], data_batch[5], data_batch[6],
         name_embeds.tolist(),
@@ -65,26 +78,27 @@ def embed_insert(collection, data_batch, transformer):
     ]
     collection.insert(ins)
 
-def process_csv_and_insert(file_path, collection, transformer):
+def process_csv_and_insert(file_path, collection, splitter, transformer):
     count = 0
     data_batch = [[], [], [], [], [], [], []]
     try:
-        for col0, col1, col2, col3, col4, col5, col6 in csv_load(file_path):
-            if count < COUNT:
-                data_batch[0].append(int(col0))
-                data_batch[1].append(col1)
-                data_batch[2].append(col2)
-                data_batch[3].append(col3)
-                data_batch[4].append(int(col4))
-                data_batch[5].append(int(col5))
-                data_batch[6].append(int(col6))
+        for row in csv_load(file_path, splitter):
+            for col0, col1, col2, col3, col4, col5, col6 in row:
+                if count < COUNT:
+                    data_batch[0].append(col0)
+                    data_batch[1].append(col1)
+                    data_batch[2].append(int(col2))
+                    data_batch[3].append(int(col3))
+                    data_batch[4].append(int(col4))
+                    data_batch[5].append(int(col5))
+                    data_batch[6].append(int(col6))
 
-                if len(data_batch[0]) % BATCH_SIZE == 0:
-                    embed_insert(collection, data_batch, transformer)
-                    data_batch = [[], [], [], [], [], [], []]
-                count += 1
-            else:
-                break
+                    if len(data_batch[0]) % BATCH_SIZE == 0:
+                        embed_insert(collection, data_batch, transformer)
+                        data_batch = [[], [], [], [], [], [], []]
+                    count += 1
+                else:
+                    break
 
         if len(data_batch[0]) > 0:
             embed_insert(collection, data_batch, transformer)
@@ -100,11 +114,13 @@ def process_csv_and_insert(file_path, collection, transformer):
 def main():
     connect_to_milvus()
     drop_collection_if_exists(COLLECTION_NAME)
+
+    splitter = SentenceTransformersTokenTextSplitter(chunk_overlap=10, model_name='sentence-transformers/all-mpnet-base-v2', tokens_per_chunk=128)
     transformer = SentenceTransformer('all-MiniLM-L6-v2')
 
     schema = create_collection_schema()
     collection = create_collection(COLLECTION_NAME, schema)
-    process_csv_and_insert(CSV_FILE_PATH, collection, transformer)
+    process_csv_and_insert(CSV_FILE_PATH, collection, splitter, transformer)
 
 if __name__ == "__main__":
     main()
