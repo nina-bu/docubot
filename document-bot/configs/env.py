@@ -1,0 +1,12 @@
+PROJECT_COLLECTION = 'projects'
+DOCUMENT_COLLECTION = 'documents'
+
+DIMENSION = 384
+MILVUS_HOST = '127.0.0.1'
+MILVUS_PORT = 19530
+BATCH_SIZE = 128
+TOP_K = 5
+COUNT = 10000
+
+PROJECT_FILE_PATH = "../data/projects.csv"
+DOCUMENT_FILE_PATH = "../data/documents.csv"

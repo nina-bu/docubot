@@ -1,21 +1,14 @@
 import csv
 import numpy as np
+import configs.env as env
 from sentence_transformers import SentenceTransformer
 from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Collection, utility
 import warnings
 
 warnings.filterwarnings("ignore", category=FutureWarning, message=".*resume_download.*")
 
-COLLECTION_NAME = 'projects'
-DIMENSION = 384
-MILVUS_HOST = '127.0.0.1'
-MILVUS_PORT = '19530'
-BATCH_SIZE = 128
-COUNT = 10000
-CSV_FILE_PATH = "../data/projects.csv"
-
 def connect_to_milvus():
-    connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
+    connections.connect(host=env.MILVUS_HOST, port=env.MILVUS_PORT)
     print('Connected to Milvus')
 
 def drop_collection_if_exists(collection_name):
@@ -28,8 +21,8 @@ def create_collection_schema():
         FieldSchema(name='name', dtype=DataType.VARCHAR, max_length=50),
         FieldSchema(name='description', dtype=DataType.VARCHAR, max_length=500),
         FieldSchema(name='type', dtype=DataType.VARCHAR, max_length=8),
-        FieldSchema(name='name_emb', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION),
-        FieldSchema(name='descr_emb', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION)
+        FieldSchema(name='name_emb', dtype=DataType.FLOAT_VECTOR, dim=env.DIMENSION),
+        FieldSchema(name='descr_emb', dtype=DataType.FLOAT_VECTOR, dim=env.DIMENSION)
     ]
     return CollectionSchema(fields=fields)
 
@@ -67,13 +60,13 @@ def process_csv_and_insert(file_path, collection, transformer):
     data_batch = [[], [], [], []]
     try:
         for col0, col1, col2, col3 in csv_load(file_path):
-            if count < COUNT:
+            if count < env.COUNT:
                 data_batch[0].append(int(col0))
                 data_batch[1].append(col1)
                 data_batch[2].append(col2)
                 data_batch[3].append(col3)
 
-                if len(data_batch[0]) % BATCH_SIZE == 0:
+                if len(data_batch[0]) % env.BATCH_SIZE == 0:
                     embed_insert(collection, data_batch, transformer)
                     data_batch = [[], [], [], []]
                 count += 1
@@ -85,7 +78,7 @@ def process_csv_and_insert(file_path, collection, transformer):
             count += len(data_batch[0])
 
         collection.flush()
-        print('Inserted data successfully in:', COLLECTION_NAME)
+        print('Inserted data successfully in:', collection.name)
         print('Number of inserted items:', count)
     except Exception as e:
         print('Error occurred during data insertion:', str(e))
@@ -93,12 +86,12 @@ def process_csv_and_insert(file_path, collection, transformer):
 
 def main():
     connect_to_milvus()
-    drop_collection_if_exists(COLLECTION_NAME)
+    drop_collection_if_exists(env.PROJECT_COLLECTION)
     transformer = SentenceTransformer('all-MiniLM-L6-v2')
 
     schema = create_collection_schema()
-    collection = create_collection(COLLECTION_NAME, schema)
-    process_csv_and_insert(CSV_FILE_PATH, collection, transformer)
+    collection = create_collection(env.PROJECT_COLLECTION, schema)
+    process_csv_and_insert(env.PROJECT_FILE_PATH, collection, transformer)
 
 if __name__ == "__main__":
     main()
