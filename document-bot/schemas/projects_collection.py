@@ -1,13 +1,11 @@
 import csv
-import warnings
 
 import configs.env as env
 import numpy as np
 from pymilvus import (Collection, CollectionSchema, DataType, FieldSchema,
                       connections, utility)
-from sentence_transformers import SentenceTransformer
+from services.embedding_service import transformer
 
-warnings.filterwarnings("ignore", category=FutureWarning, message=".*resume_download.*")
 
 def connect_to_milvus():
     connections.connect(host=env.MILVUS_HOST, port=env.MILVUS_PORT)
@@ -86,14 +84,10 @@ def process_csv_and_insert(file_path, collection, transformer):
         print('Error occurred during data insertion:', str(e))
         raise e
 
-def main():
+if __name__ == "__main__":
     connect_to_milvus()
     drop_collection_if_exists(env.PROJECT_COLLECTION)
-    transformer = SentenceTransformer('all-MiniLM-L6-v2')
 
     schema = create_collection_schema()
     collection = create_collection(env.PROJECT_COLLECTION, schema)
     process_csv_and_insert(env.PROJECT_FILE_PATH, collection, transformer)
-
-if __name__ == "__main__":
-    main()

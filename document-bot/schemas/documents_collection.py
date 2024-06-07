@@ -2,11 +2,9 @@ import csv
 import warnings
 
 import configs.env as env
-import numpy as np
-from langchain_text_splitters import SentenceTransformersTokenTextSplitter
 from pymilvus import (Collection, CollectionSchema, DataType, FieldSchema,
                       connections, utility)
-from sentence_transformers import SentenceTransformer
+from services.embedding_service import splitter, transformer
 
 warnings.filterwarnings("ignore", category=FutureWarning, message=".*resume_download.*")
 
@@ -101,18 +99,10 @@ def process_csv_and_insert(file_path, collection, splitter, transformer):
         print('Error occurred during data insertion:', str(e))
         raise e
 
-
-def main():
+if __name__ == "__main__":
     connect_to_milvus()
     drop_collection_if_exists(env.DOCUMENT_COLLECTION)
-
-    splitter = SentenceTransformersTokenTextSplitter(chunk_overlap=10, model_name='sentence-transformers/all-mpnet-base-v2', tokens_per_chunk=128)
-    transformer = SentenceTransformer('all-MiniLM-L6-v2')
 
     schema = create_collection_schema()
     collection = create_collection(env.DOCUMENT_COLLECTION, schema)
     process_csv_and_insert(env.DOCUMENT_FILE_PATH, collection, splitter, transformer)
-    
-
-if __name__ == "__main__":
-    main()
