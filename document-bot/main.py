@@ -1,10 +1,11 @@
 import uvicorn
 from fastapi import FastAPI
-from routers import projects
+from routers import documents, projects
 
 app = FastAPI()
 
 app.include_router(projects.router)
+app.include_router(documents.router)
 
 # Initialize Eureka client (uncomment if needed)
 # init_eureka_client()

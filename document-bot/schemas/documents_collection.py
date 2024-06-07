@@ -101,8 +101,8 @@ def process_csv_and_insert(file_path, collection, splitter, transformer):
 
 if __name__ == "__main__":
     connect_to_milvus()
-    drop_collection_if_exists(env.DOCUMENT_COLLECTION)
+    drop_collection_if_exists(env.DOCUMENT_COLLECTION_NAME)
 
     schema = create_collection_schema()
-    collection = create_collection(env.DOCUMENT_COLLECTION, schema)
+    collection = create_collection(env.DOCUMENT_COLLECTION_NAME, schema)
     process_csv_and_insert(env.DOCUMENT_FILE_PATH, collection, splitter, transformer)

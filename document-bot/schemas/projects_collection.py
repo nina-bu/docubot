@@ -1,7 +1,6 @@
 import csv
 
 import configs.env as env
-import numpy as np
 from pymilvus import (Collection, CollectionSchema, DataType, FieldSchema,
                       connections, utility)
 from services.embedding_service import transformer
@@ -17,7 +16,7 @@ def drop_collection_if_exists(collection_name):
 
 def create_collection_schema():
     fields = [
-        FieldSchema(name='project_id', dtype=DataType.INT64, is_primary=True, auto_id=False),
+        FieldSchema(name='id', dtype=DataType.INT64, is_primary=True, auto_id=False),
         FieldSchema(name='name', dtype=DataType.VARCHAR, max_length=50),
         FieldSchema(name='description', dtype=DataType.VARCHAR, max_length=500),
         FieldSchema(name='type', dtype=DataType.VARCHAR, max_length=8),
@@ -86,8 +85,8 @@ def process_csv_and_insert(file_path, collection, transformer):
 
 if __name__ == "__main__":
     connect_to_milvus()
-    drop_collection_if_exists(env.PROJECT_COLLECTION)
+    drop_collection_if_exists(env.PROJECT_COLLECTION_NAME)
 
     schema = create_collection_schema()
-    collection = create_collection(env.PROJECT_COLLECTION, schema)
+    collection = create_collection(env.PROJECT_COLLECTION_NAME, schema)
     process_csv_and_insert(env.PROJECT_FILE_PATH, collection, transformer)
