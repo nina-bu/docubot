@@ -1,40 +1,41 @@
-ProjectId,Name,Description,Type
-1,Clean Air Initiative,A project aimed at reducing air pollution in urban areas by promoting electric vehicles and green infrastructure.,EXTERNAL
-2,Water Conservation Program,An internal initiative to reduce water usage within the organization through efficiency measures and awareness campaigns.,INTERNAL
-3,Sustainable Agriculture Project,A collaboration with local farmers to promote sustainable farming practices and reduce the use of harmful pesticides.,EXTERNAL
-4,Energy Efficiency Upgrade,Upgrading the organization's facilities to improve energy efficiency and reduce carbon footprint.,INTERNAL
-5,Recycling Awareness Campaign,A public campaign to increase awareness about the importance of recycling and proper waste management.,EXTERNAL
-6,Green Office Initiative,Implementing green practices in office operations to minimize environmental impact.,INTERNAL
-7,Biodiversity Protection Program,A project focused on protecting local biodiversity through conservation efforts and habitat restoration.,EXTERNAL
-8,Sustainable Transportation Plan,Developing a plan to encourage the use of sustainable transportation options among employees.,INTERNAL
-9,Renewable Energy Project,Aiming to increase the use of renewable energy sources within the organization.,INTERNAL
-10,Community Clean-up Drive,Organizing community clean-up events to maintain clean and healthy environments.,EXTERNAL
-11,Eco-Friendly Packaging,Promoting the use of eco-friendly packaging materials.,EXTERNAL
-12,Tree Planting Initiative,Organizing tree planting events to improve local green spaces.,INTERNAL
-13,Waste Reduction Strategy,Developing strategies to reduce waste generation.,EXTERNAL
-14,Sustainable Supply Chain,Ensuring the supply chain practices are sustainable.,INTERNAL
-15,Green Building Certification,Achieving green building certifications for facilities.,EXTERNAL
-16,Climate Change Education,Educating the community about climate change.,INTERNAL
-17,Aqua Life,Monitoring and improving water quality.,EXTERNAL
-18,Carbon Offsetting Program,Implementing carbon offsetting initiatives.,INTERNAL
-19,Energy-Saving Campaign,Campaigning to encourage energy-saving habits.,EXTERNAL
-20,Green Commuting Challenge,Encouraging green commuting options.,INTERNAL
-21,Eco Volunteer Network,Establishing a network of volunteers to participate in various environmental conservation activities.,EXTERNAL
-22,Wildlife Corridor Restoration,Restoring and maintaining wildlife corridors to support animal migration and biodiversity.,EXTERNAL
-23,Zero Waste Office,Implementing zero waste practices in the workplace.,INTERNAL
-24,Green Energy Workshop,Organizing workshops to educate employees about renewable energy and energy conservation.,INTERNAL
-25,Urban Farming Project,Promoting urban farming initiatives to increase local food production.,EXTERNAL
-26,Plastic-Free Challenge,Encouraging employees to reduce plastic use through a month-long challenge.,INTERNAL
-27,Sustainable Event Planning,Developing guidelines for planning environmentally-friendly events.,INTERNAL
-28,Nature Education Program,Providing nature education programs for local schools and communities.,EXTERNAL
-29,Composting Initiative,Setting up composting systems within the organization.,INTERNAL
-30,Green Tech Adoption,Adopting green technologies to reduce the environmental footprint.,EXTERNAL
-31,Eco Ambassador Program,Training employees to become eco ambassadors and promote sustainability within the organization.,INTERNAL
-32,Environmental Impact Assessment,Conducting assessments to understand and mitigate the organization's environmental impact.,INTERNAL
-33,Sustainable Tourism Promotion,Promoting sustainable tourism practices in collaboration with local businesses.,EXTERNAL
-34,Paperless Office Campaign,Encouraging the transition to a paperless office environment.,INTERNAL
-35,Green Commute Incentives,Providing incentives for employees to use sustainable commuting options.,INTERNAL
-36,Renewable Energy Fair,Organizing a fair to showcase renewable energy solutions and innovations.,EXTERNAL
-37,Eco-Friendly Product Line,Developing a line of eco-friendly products.,EXTERNAL
-38,Habitat Restoration Project,Restoring natural habitats to support local wildlife.,EXTERNAL
-39,Sustainable Fashion Show,Hosting a fashion show to promote sustainable clothing.,EXTERNAL
+ProjectId,Name,Description,Budget,Type
+1,Clean Air Initiative,A project aimed at reducing air pollution in urban areas by promoting electric vehicles and green infrastructure.,1000000,EXTERNAL
+2,Water Conservation Program,An internal initiative to reduce water usage within the organization through efficiency measures and awareness campaigns.,500000,INTERNAL
+3,Sustainable Agriculture Project,A collaboration with local farmers to promote sustainable farming practices and reduce the use of harmful pesticides.,750000,EXTERNAL
+4,Energy Efficiency Upgrade,Upgrading the organization's facilities to improve energy efficiency and reduce carbon footprint.,1200000,INTERNAL
+5,Recycling Awareness Campaign,A public campaign to increase awareness about the importance of recycling and proper waste management.,600000,EXTERNAL
+6,Green Office Initiative,Implementing green practices in office operations to minimize environmental impact.,800000,INTERNAL
+7,Biodiversity Protection Program,A project focused on protecting local biodiversity through conservation efforts and habitat restoration.,900000,EXTERNAL
+8,Sustainable Transportation Plan,Developing a plan to encourage the use of sustainable transportation options among employees.,1100000,INTERNAL
+9,Renewable Energy Project,Aiming to increase the use of renewable energy sources within the organization.,1300000,INTERNAL
+10,Community Clean-up Drive,Organizing community clean-up events to maintain clean and healthy environments.,400000,EXTERNAL
+11,Eco-Friendly Packaging,Promoting the use of eco-friendly packaging materials.,700000,EXTERNAL
+12,Tree Planting Initiative,Organizing tree planting events to improve local green spaces.,900000,INTERNAL
+13,Waste Reduction Strategy,Developing strategies to reduce waste generation.,600000,EXTERNAL
+14,Sustainable Supply Chain,Ensuring the supply chain practices are sustainable.,1100000,INTERNAL
+15,Green Building Certification,Achieving green building certifications for facilities.,800000,EXTERNAL
+16,Climate Change Education,Educating the community about climate change.,1000000,INTERNAL
+17,Nemo Life,Monitoring and improving water quality.,500000,EXTERNAL
+18,Carbon Offsetting Program,Implementing carbon offsetting initiatives.,1200000,INTERNAL
+19,Energy-Saving Campaign,Campaigning to encourage energy-saving habits.,700000,EXTERNAL
+20,Green Commuting Challenge,Encouraging green commuting options.,900000,INTERNAL
+21,Eco Volunteer Network,Establishing a network of volunteers to participate in various environmental conservation activities.,600000,EXTERNAL
+22,Wildlife Corridor Restoration,Restoring and maintaining wildlife corridors to support animal migration and biodiversity.,1100000,EXTERNAL
+23,Zero Waste Office,Implementing zero waste practices in the workplace.,800000,INTERNAL
+24,Green Energy Workshop,Organizing workshops to educate employees about renewable energy and energy conservation.,1000000,INTERNAL
+25,Urban Farming Project,Promoting urban farming initiatives to increase local food production.,500000,EXTERNAL
+26,Plastic-Free Challenge,Encouraging employees to reduce plastic use through a month-long challenge.,1200000,INTERNAL
+27,Sustainable Event Planning,Developing guidelines for planning environmentally-friendly events.,700000,INTERNAL
+28,Nature Education Program,Providing nature education programs for local schools and communities.,900000,EXTERNAL
+29,Composting Initiative,Setting up composting systems within the organization.,600000,INTERNAL
+30,Green Tech Adoption,Adopting green technologies to reduce the environmental footprint.,1100000,EXTERNAL
+31,Eco Ambassador Program,Training employees to become eco ambassadors and promote sustainability within the organization.,800000,INTERNAL
+32,Environmental Impact Assessment,Conducting assessments to understand and mitigate the organization's environmental impact.,1000000,INTERNAL
+33,Sustainable Tourism Promotion,Promoting sustainable tourism practices in collaboration with local businesses.,500000,EXTERNAL
+34,Paperless Office Campaign,Encouraging the transition to a paperless office environment.,1200000,INTERNAL
+35,Green Commute Incentives,Providing incentives for employees to use sustainable commuting options.,700000,INTERNAL
+36,Renewable Energy Fair,Organizing a fair to showcase renewable energy solutions and innovations.,900000,EXTERNAL
+37,Eco-Friendly Product Line,Developing a line of eco-friendly products.,600000,EXTERNAL
+38,Habitat Restoration Project,Restoring natural habitats to support local wildlife.,1100000,EXTERNAL
+39,Sustainable Fashion Show,Hosting a fashion show to promote sustainable clothing.,800000,EXTERNAL
+40,Green Infrastructure Development,Developing eco-friendly infrastructure projects to improve environmental sustainability.,1500000,EXTERNAL

@@ -12,26 +12,36 @@ class VectorCreateRequest(BaseModel):
     id: int
     name: str
     description: str
+    budget: int
     type: str
 
 class VectorUpdateRequest(BaseModel):
     name: str
     description: str
+    budget: int
     type: str
 
 class VectorResponse(BaseModel):
     id: int
     name: str
     description: str
+    budget: int
     type: str
 
 class VectorSearchRequest(BaseModel):
     search_term: str
 
+class VectorFilterRequest(BaseModel):
+    description: str
+    lower_budget: int
+    upper_budget: int
+    type: str
+
 class Vector(BaseModel):
     id: int
     name: str
     description: str
+    budget: int
     type: str
     name_emb: list
     descr_emb: list
@@ -48,6 +58,7 @@ async def create(project: VectorCreateRequest):
             id=project.id,
             name=project.name,
             description=project.description,
+            budget=project.budget,
             type=project.type,
             name_emb=embed_insert(project.name),
             descr_emb=embed_insert(project.description)
@@ -69,6 +80,7 @@ async def get(vector_id: int):
                 id=vector["id"],
                 name=vector["name"],
                 description=vector["description"],
+                budget=vector["budget"],
                 type=vector["type"]
             )
         else:
@@ -84,6 +96,7 @@ async def update(vector_id: int, project: VectorUpdateRequest):
             id=vector_id,
             name=project.name,
             description=project.description,
+            budget=project.budget,
             type=project.type,
             name_emb=embed_insert(project.name),
             descr_emb=embed_insert(project.description)
@@ -103,11 +116,11 @@ async def delete(vector_id: int):
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
-# FEAT: COMPLEX QUERY 1 - Hybrid Search
+# FEAT: COMPLEX QUERY 1 - Hybrid Search (name and description)
 @router.post("/api/v1/collections/projects/search")
-async def search(search: VectorSearchRequest):
+async def search(search_req: VectorSearchRequest):
     try:
-        vector_data = hybrid_search(search.search_term)
+        vector_data = hybrid_search(search_req.search_term)
         if vector_data:
             return vector_data
         else:
@@ -116,6 +129,21 @@ async def search(search: VectorSearchRequest):
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)   
 
+# FEAT: COMPLEX QUERY 2 - Vector Search with filters (budget and type)
+@router.post("/api/v1/collections/projects/filter")
+async def filter(filter_req: VectorFilterRequest):
+    try:
+        vector_data = filter_search(filter_req.description, 
+                                    filter_req.lower_budget, 
+                                    filter_req.upper_budget, 
+                                    filter_req.type)
+        if vector_data:
+            return vector_data
+        else:
+            return JSONResponse(content={"message": "No vectors match the search."}, status_code=204)
+        
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)   
 
 def hybrid_search(search_term: str):
     searh_vector = embed_search(search_term)
@@ -125,7 +153,7 @@ def hybrid_search(search_term: str):
         "anns_field":"name_emb",
         "param":{
             "metric_type": "L2",
-            "params": {"nprobe": 12}
+            "params": {"nprobe": 10}
         }, 
         "limit":5
     }      
@@ -136,7 +164,7 @@ def hybrid_search(search_term: str):
         "anns_field":"descr_emb",
         "param":{
             "metric_type": "L2",
-            "params": {"nprobe": 12}
+            "params": {"nprobe": 10}
         }, 
         "limit":5
     }
@@ -150,6 +178,18 @@ def hybrid_search(search_term: str):
         reqs, 
         rerank,
         limit=2, 
-        output_fields=['name', 'description', 'type']
+        output_fields=['name', 'description', 'budget', 'type']
     )
     return res
+
+def filter_search(description, lower_budget, upper_budget, type):
+    descr_vector = embed_search(description)
+
+    return client.search(
+        collection_name=collection_name,
+        data=descr_vector,
+        anns_field="descr_emb",
+        filter=f'{lower_budget} <= budget <= {upper_budget} and type == "{type}"',
+        output_fields=['name', 'description', 'budget', 'type'],
+        limit=10
+    )

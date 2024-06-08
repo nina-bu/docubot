@@ -87,7 +87,7 @@ def process_csv_and_insert(file_path, collection, splitter, transformer):
                     data_batch[5].append(int(col5))
                     data_batch[6].append(int(col6))
 
-                    if len(data_batch[0]) % BATCH_SIZE == 0:
+                    if len(data_batch[0]) % env.BATCH_SIZE == 0:
                         embed_insert(collection, data_batch, transformer)
                         data_batch = [[], [], [], [], [], [], []]
                     count += 1
