@@ -22,8 +22,8 @@ def create_collection_schema():
         FieldSchema(name='project_id', dtype=DataType.INT64),
         FieldSchema(name='document_id', dtype=DataType.INT64),
         FieldSchema(name='name', dtype=DataType.VARCHAR, max_length=50),
-        FieldSchema(name='version', dtype=DataType.INT64),
-        FieldSchema(name='chunk_id', dtype=DataType.INT64),
+        FieldSchema(name='version', dtype=DataType.INT32),
+        FieldSchema(name='chunk_id', dtype=DataType.INT32),
         FieldSchema(name='text', dtype=DataType.VARCHAR, max_length=1000),
         FieldSchema(name='txt_emb', dtype=DataType.FLOAT_VECTOR, dim=env.DIMENSION),
     ]

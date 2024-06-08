@@ -9,8 +9,11 @@ warnings.filterwarnings("ignore", category=FutureWarning, message=".*resume_down
 splitter = SentenceTransformersTokenTextSplitter(chunk_overlap=10, model_name='sentence-transformers/all-mpnet-base-v2', tokens_per_chunk=128)
 transformer = SentenceTransformer('all-MiniLM-L6-v2')
 
-def embed(text):
-    return transformer.encode(text).tolist()
+def embed_insert(data):
+    return transformer.encode(data).tolist()
+
+def embed_search(data):
+    return transformer.encode([data])
 
 def chunk(text):
     data_chunks = []

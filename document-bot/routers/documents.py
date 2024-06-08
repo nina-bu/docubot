@@ -2,7 +2,7 @@ from configs.env import DOCUMENT_COLLECTION_NAME
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from services.embedding_service import chunk, embed
+from services.embedding_service import chunk, embed_insert
 from services.milvus_service import client
 
 router = APIRouter()
@@ -35,6 +35,7 @@ class Vector(BaseModel):
 
 collection_name = DOCUMENT_COLLECTION_NAME
 
+# FEAT: CRUD
 @router.post("/api/v1/collections/documents")
 async def create(document: VectorCreateRequest):
     try:
@@ -46,7 +47,7 @@ async def create(document: VectorCreateRequest):
                 version=document.version,
                 text=chunk_txt,
                 chunk_id=chunk_id, 
-                txt_emb=embed(chunk_txt)
+                txt_emb=embed_insert(chunk_txt)
             )
             client.insert(collection_name=collection_name, data=vector.dict())
         return JSONResponse(content={"message": f"Vector(s) successfully created."}, status_code=201)
@@ -54,6 +55,7 @@ async def create(document: VectorCreateRequest):
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
 
+# FEAT: SIMPLE QUERY 1 - Retrieval by ID
 @router.get("/api/v1/collections/documents/{vector_id}", response_model=VectorResponse)
 async def get(vector_id: int):
     try:

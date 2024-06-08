@@ -28,8 +28,8 @@ def create_collection_schema():
 def create_collection(collection_name, schema):
     collection = Collection(name=collection_name, schema=schema)
 
-    collection.create_index(field_name="name_emb", index_params={'metric_type': 'L2', 'index_type': 'IVF_FLAT', 'params': {'nlist': 1536}})
-    collection.create_index(field_name="descr_emb", index_params={'metric_type': 'L2', 'index_type': 'IVF_FLAT', 'params': {'nlist': 1536}})
+    collection.create_index(field_name="name_emb", index_params={'metric_type': 'L2', 'index_type': 'IVF_FLAT', 'params': {'nlist': 256}})
+    collection.create_index(field_name="descr_emb", index_params={'metric_type': 'L2', 'index_type': 'IVF_FLAT', 'params': {'nlist': 256}})
     collection.load()
 
     print('Collection created and indices created')
