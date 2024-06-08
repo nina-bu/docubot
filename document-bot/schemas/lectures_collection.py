@@ -4,19 +4,13 @@ from pymilvus import connections, FieldSchema, CollectionSchema, DataType, Colle
 from sentence_transformers import SentenceTransformer
 from langchain_text_splitters import SentenceTransformersTokenTextSplitter
 import strip_markdown
+import configs.env as env
 
 warnings.filterwarnings("ignore", category=FutureWarning, message=".*resume_download.*")
 
-COLLECTION_NAME = 'lectures'
-DIMENSION = 384
-MILVUS_HOST = '127.0.0.1'
-MILVUS_PORT = '19530'
-BATCH_SIZE = 128
-COUNT = 10000
-CSV_FILE_PATH = "../data/lectures.csv"
 
 def connect_to_milvus():
-    connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
+    connections.connect(host=env.MILVUS_HOST, port=env.MILVUS_PORT)
     print('Connected to Milvus')
 
 def drop_collection_if_exists(collection_name):
@@ -33,8 +27,8 @@ def create_collection_schema():
         FieldSchema(name='max_recommended_age', dtype=DataType.INT32),
         FieldSchema(name='creator_id', dtype=DataType.INT64),
         FieldSchema(name='chunk_id', dtype=DataType.INT32),
-        FieldSchema(name='name_emb', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION),
-        FieldSchema(name='content_emb', dtype=DataType.FLOAT_VECTOR, dim=DIMENSION),
+        FieldSchema(name='name_emb', dtype=DataType.FLOAT_VECTOR, dim=env.DIMENSION),
+        FieldSchema(name='content_emb', dtype=DataType.FLOAT_VECTOR, dim=env.DIMENSION),
     ]
     return CollectionSchema(fields)
 
@@ -84,7 +78,7 @@ def process_csv_and_insert(file_path, collection, splitter, transformer):
     try:
         for row in csv_load(file_path, splitter):
             for col0, col1, col2, col3, col4, col5, col6 in row:
-                if count < COUNT:
+                if count < env.COUNT:
                     data_batch[0].append(col0)
                     data_batch[1].append(col1)
                     data_batch[2].append(int(col2))
@@ -105,7 +99,7 @@ def process_csv_and_insert(file_path, collection, splitter, transformer):
             count += len(data_batch[0])
 
         collection.flush()
-        print('Inserted data successfully in:', COLLECTION_NAME)
+        print('Inserted data successfully in:', env.LECTURES_COLLECTION_NAME)
         print('Number of inserted items:', count)
     except Exception as e:
         print('Error occurred during data insertion:', str(e))
@@ -113,14 +107,14 @@ def process_csv_and_insert(file_path, collection, splitter, transformer):
     
 def main():
     connect_to_milvus()
-    drop_collection_if_exists(COLLECTION_NAME)
+    drop_collection_if_exists(env.LECTURES_COLLECTION_NAME)
 
     splitter = SentenceTransformersTokenTextSplitter(chunk_overlap=10, model_name='sentence-transformers/all-mpnet-base-v2', tokens_per_chunk=128)
     transformer = SentenceTransformer('all-MiniLM-L6-v2')
 
     schema = create_collection_schema()
-    collection = create_collection(COLLECTION_NAME, schema)
-    process_csv_and_insert(CSV_FILE_PATH, collection, splitter, transformer)
+    collection = create_collection(env.LECTURES_COLLECTION_NAME, schema)
+    process_csv_and_insert(env.LECTURES_FILE_PATH, collection, splitter, transformer)
 
 if __name__ == "__main__":
     main()
