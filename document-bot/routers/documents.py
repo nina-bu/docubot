@@ -58,6 +58,9 @@ class NoVersionFound(Exception):
 
 collection_name = DOCUMENT_COLLECTION_NAME
 
+@router.get("/test-milvus-connection/")
+async def test_milvus_connection():
+    try:
 # FEAT: CRUD
 # TODO: PDF extraction
 @router.post("/api/v1/collections/documents")
