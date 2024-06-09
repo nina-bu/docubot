@@ -1,7 +1,9 @@
 from typing import Optional
 from fastapi import APIRouter
+from fastapi.params import Query
+from pymilvus import AnnSearchRequest, Collection, WeightedRanker
 from configs.env import LECTURES_COLLECTION_NAME
-from services.embedding_service import chunk, embed
+from services.embedding_service import chunk, embed_search, embed_insert
 from pydantic import BaseModel
 from services.milvus_service import client
 from fastapi.responses import JSONResponse
@@ -39,6 +41,7 @@ class LectureGetResponse(BaseModel):
 router = APIRouter()
 
 collection_name = LECTURES_COLLECTION_NAME
+collection = Collection(name=collection_name)
 
 @router.post("/api/v1/collections/lectures")
 async def create(lecture: LectureCreateRequest):
@@ -52,8 +55,8 @@ async def create(lecture: LectureCreateRequest):
                 max_recommended_age=lecture.max_recommended_age,
                 creator_id=lecture.creator_id,
                 chunk_id=chunk_id,
-                name_emb=embed(lecture.name),
-                content_emb=embed(chunk_txt)
+                name_emb=embed_insert(lecture.name),
+                content_emb=embed_insert(chunk_txt)
             )
             client.insert(collection_name=collection_name, data=vector.dict())
         return JSONResponse(content={'message': f"Vector(s) successfully created."}, status_code=201)
@@ -61,7 +64,7 @@ async def create(lecture: LectureCreateRequest):
     except Exception as e:
         return JSONResponse(content={'error': str(e)}, status_code=500)
     
-
+# FEAT: SIMPLE QUERY 1 - Retreival by ID
 @router.get("/api/v1/collections/lectures/{id}", response_model=LectureGetResponse)
 async def get(id: int):
     try:
@@ -101,8 +104,8 @@ async def update(id: int, lecture: LectureCreateRequest):
                 max_recommended_age=lecture.max_recommended_age,
                 creator_id=lecture.creator_id,
                 chunk_id=chunk_id,
-                name_emb=embed(lecture.name),
-                content_emb=embed(chunk_txt)
+                name_emb=embed_insert(lecture.name),
+                content_emb=embed_insert(chunk_txt)
             )
             client.insert(collection_name=collection_name, data=vector.dict())
         return JSONResponse(content={'message': f"Vector(s) successfully updated."}, status_code=200)
@@ -118,3 +121,80 @@ async def delete(id: int):
    
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
+    
+# FEAT: SIMPLE QUERY 2 - Single vector search
+@router.get("/api/v1/collections/lecturess/vector-search")
+async def vector_search(search_text: str = Query(..., description="The text to search for")):
+    try:
+        vector_data = single_vector_search(search_text)
+        if vector_data:
+            return vector_data
+        else:
+            return JSONResponse(content={"message": "No vectors match the search."}, status_code=204)
+        
+    except Exception as e:
+         return JSONResponse(content={"error": str(e)}, status_code=500)
+    
+# FEAT: COMPLEX QUERY 1 - Hybrid Search (name and content)
+@router.get("/api/v1/collections/lecturess/hybrid-search")
+async def search(name_search_text: str = Query(..., description="The text to search for"), content_search_text: str = Query(..., description="The text to search for")):
+    try:
+        vector_data = multiple_vector_ann_search(name_search_text, content_search_text)
+        if vector_data:
+            return vector_data
+        else:
+            return JSONResponse(content={"message": "No vectors match the search."}, status_code=204)
+        
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+    
+
+def single_vector_search(search_term: str):
+    search_vector = embed_search(search_term)
+
+    return client.search(
+        collection_name=collection_name,
+        data=search_vector,
+        anns_field="content_emb",
+        output_fields=['name', 'content', 'difficulty', 'min_recommended_age', 'max_recommended_age', 'creator_id'],
+        limit=10
+    )
+
+def multiple_vector_ann_search(name_search_term: str, content_search_term: str):
+    name_search_vector = embed_search(name_search_term)
+
+    search_param_1 = {
+        "data":name_search_vector,
+        "anns_field":"name_emb",
+        "param":{
+            "metric_type": "L2",
+            "params": {"nprobe": 10}
+        }, 
+        "limit":5
+    }      
+    request_1 = AnnSearchRequest(**search_param_1)
+
+    content_search_vector = embed_search(content_search_term)
+
+    search_param_2 = {
+        "data":content_search_vector,
+        "anns_field":"content_emb",
+        "param":{
+            "metric_type": "L2",
+            "params": {"nprobe": 10}
+        }, 
+        "limit":5
+    }
+    request_2 = AnnSearchRequest(**search_param_2)
+
+    reqs = [request_1, request_2]
+    rerank = WeightedRanker(0.4, 0.6) 
+
+    collection.load()
+    res = collection.hybrid_search(
+        reqs, 
+        rerank,
+        limit=5, 
+        output_fields=['name', 'content', 'difficulty', 'min_recommended_age', 'max_recommended_age', 'creator_id']
+    )
+    return res
