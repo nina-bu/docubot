@@ -61,6 +61,11 @@ collection_name = DOCUMENT_COLLECTION_NAME
 @router.get("/test-milvus-connection/")
 async def test_milvus_connection():
     try:
+        status = client.get_collection_stats(collection_name="documents")
+        return {"message": "Connected to Milvus", "status": status}
+    except Exception as e:
+        return {"message": "Error occurred during Milvus connection:", "error": str(e)}
+
 # FEAT: CRUD
 # TODO: PDF extraction
 @router.post("/api/v1/collections/documents")
