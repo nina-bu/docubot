@@ -137,7 +137,7 @@ async def vector_search(search_text: str = Query(..., description="The text to s
     
 # FEAT: COMPLEX QUERY 1 - Hybrid Search (name and content)
 @router.get("/api/v1/collections/lecturess/hybrid-search")
-async def search(name_search_text: str = Query(..., description="The text to search for"), content_search_text: str = Query(..., description="The text to search for")):
+async def hybrid_search(name_search_text: str = Query(..., description="The text to search for"), content_search_text: str = Query(..., description="The text to search for")):
     try:
         vector_data = multiple_vector_ann_search(name_search_text, content_search_text)
         if vector_data:
@@ -148,6 +148,33 @@ async def search(name_search_text: str = Query(..., description="The text to sea
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
     
+
+# FEAT: COMPLEX QUERY 2 - Single vector search with filters (difficulty and creator_id)
+@router.get("/api/v1/collections/lecturess/filter")
+async def vector_search_with_filters(difficulty: int = Query(..., gt=0, lt=3), creator_id: int = Query(...), content_search_text: str = Query(..., description="The text to search for")):
+    try:
+        vector_data = single_vector_search_with_filters(content_search_text, f'difficulty == {difficulty} and creator_id == {creator_id}')
+        if vector_data:
+            return vector_data
+        else:
+            return JSONResponse(content={"message": "No vectors match the search."}, status_code=204)
+        
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+    
+# FEAT: COMPLEX QUERY 3 - Single vector search with filters (age range)
+@router.get("/api/v1/collections/lecturess/filter_age")
+async def vector_search_with_filters_age(age: int = Query(...), content_search_text: str = Query(..., description="The text to search for")):
+    try:
+        vector_data = single_vector_search_with_filters(content_search_text, f'min_recommended_age <= {age} and max_recommended_age >= {age}')
+        if vector_data:
+            return vector_data
+        else:
+            return JSONResponse(content={"message": "No vectors match the search."}, status_code=204)
+        
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500)
+
 
 def single_vector_search(search_term: str):
     search_vector = embed_search(search_term)
@@ -198,3 +225,15 @@ def multiple_vector_ann_search(name_search_term: str, content_search_term: str):
         output_fields=['name', 'content', 'difficulty', 'min_recommended_age', 'max_recommended_age', 'creator_id']
     )
     return res
+
+def single_vector_search_with_filters(search_term: str, filter: str):
+    search_vector = embed_search(search_term)
+
+    return client.search(
+        collection_name=collection_name,
+        data=search_vector,
+        anns_field="content_emb",
+        output_fields=['name', 'content', 'difficulty', 'min_recommended_age', 'max_recommended_age', 'creator_id'],
+        filter=filter,
+        limit=10
+    )
