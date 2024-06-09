@@ -1,34 +1,4 @@
-version: '3.8'
-
 services:
-  # eureka-server:
-  #   build:
-  #     context: ./EurekaService
-  #     dockerfile: Dockerfile
-  #   image: eureka-server:latest
-  #   ports:
-  #     - "8761:8761"
-
-  # gateway-api:
-  #   build:
-  #     context: ./GatewayService
-  #     dockerfile: Dockerfile
-  #   image: gateway-api:latest
-  #   environment:
-  #     EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
-  #   depends_on:
-  #     - eureka-server
-  #     - elastic-search-service
-  #     # - relational-service
-  #     # - document-service
-  #     - graph-service
-  #     #- timeseries-service
-  #     # - columnar-key-value-service
-  #     # - standalone
-  #     # - vector-database-service
-  #   ports:
-  #     - "9000:9000"
-
 
   etcd:
     container_name: milvus-etcd
@@ -46,7 +16,9 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
-
+    networks:
+      - default
+      
   minio:
     container_name: milvus-minio
     image: minio/minio:RELEASE.2023-03-20T20-16-18Z
@@ -64,6 +36,8 @@ services:
       interval: 30s
       timeout: 20s
       retries: 3
+    networks:
+      - default
 
   standalone:
     container_name: milvus-standalone
@@ -88,38 +62,31 @@ services:
     depends_on:
       - "etcd"
       - "minio"
+    networks:
+      - default
 
-#  vector-database-service:
-#    image: python:3.9-slim
-#     build:
-#      context: ./VectorDatabaseMicroservice
-#      dockerfile: Dockerfile
-#    volumes:
-#      - ./metodi.py:/app/metodi.py
-#      - ./requirements.txt:/app/requirements.txt
-#    environment:
-#      EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
-#    ports:
-#      - "8000:8000"
-#    command: uvicorn metodi:app --host 127.0.0.1 --port 8000
-#    depends_on:
-#      - eureka-server
-#      - etcd
-#      - minio
-#      - standalone
-
-#  grafana:
-#    image: grafana/grafana-enterprise
-#    container_name: grafana
-#    restart: unless-stopped
-#    environment:
-#      - GF_SERVER_ROOT_URL=http://my.grafana.server/
-#      - GF_INSTALL_PLUGINS=grafana-clock-panel
-#    ports:
-#      - '3000:3000'
-#    volumes:
-#      - 'grafana_storage:/var/lib/grafana'
+  docubot-service:
+    image: python:3.9-slim
+    build:
+     context: ./document-bot
+     dockerfile: Dockerfile
+    volumes:
+      - ./document-bot/main.py:/app/main.py:ro
+      - ./document-bot/requirements.txt:/app/requirements.txt:ro
+    ports:
+      - "8000:8000"
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    depends_on:
+      - etcd
+      - minio
+      - standalone
+    networks:
+      - default
 
 volumes:
   data:
-  grafana_storage: { }
+  # grafana_storage:
+
+networks:
+  default:
+    driver: bridge

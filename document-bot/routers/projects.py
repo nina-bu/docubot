@@ -1,4 +1,4 @@
-from configs.env import MILVUS_HOST, MILVUS_PORT, PROJECT_COLLECTION_NAME
+from configs.env import PROJECT_COLLECTION_NAME
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -47,7 +47,6 @@ class Vector(BaseModel):
     descr_emb: list
 
 collection_name = PROJECT_COLLECTION_NAME
-connections.connect(host=MILVUS_HOST, port=MILVUS_PORT)
 collection = Collection(name=PROJECT_COLLECTION_NAME)
 
 # FEAT: CRUD
