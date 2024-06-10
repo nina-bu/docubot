@@ -1,19 +1,15 @@
-import logging
+import io
+import os
 import re
 
+import pymupdf
 import requests
 from configs.env import DOCUMENT_COLLECTION_NAME
-from fastapi import APIRouter
+from fastapi import APIRouter, File, Form, UploadFile
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from services.embedding_service import chunk, embed_insert, embed_search
 from services.milvus_service import client
-
-logging.basicConfig(
-    level=logging.INFO,  # Set the desired log level
-    format="%(asctime)s - %(levelname)s - %(message)s",
-    handlers=[logging.FileHandler("app.log"), logging.StreamHandler()],
-)
 
 router = APIRouter()
 
@@ -67,22 +63,35 @@ async def test_milvus_connection():
         return {"message": "Error occurred during Milvus connection:", "error": str(e)}
 
 # FEAT: CRUD
-# TODO: PDF extraction
 @router.post("/api/v1/collections/documents")
-async def create(document: VectorCreateRequest):
+async def create(
+    project_id: int = Form(...),
+    document_id: int = Form(...),
+    name: str = Form(...),
+    version: str = Form(...),
+    text: str = Form(None),
+    file: UploadFile = File(None)
+):
     try:
-        for chunk_id, chunk_txt in chunk(document.text):
+        if not text and not file:
+            return JSONResponse(content={"message": "Either 'text' or 'file' must be provided"}, status_code=400)        
+            
+        if file and file.filename.endswith(".pdf"):
+            text = pdf_to_text(file)
+
+        for chunk_id, chunk_txt in chunk(text):
             vector = Vector(
-                project_id=document.project_id,
-                document_id=document.document_id,
-                name=document.name,
-                version=document.version,
+                project_id=project_id,
+                document_id=document_id,
+                name=name,
+                version=version,
                 text=chunk_txt,
-                chunk_id=chunk_id, 
+                chunk_id=chunk_id,
                 txt_emb=embed_insert(chunk_txt)
             )
             client.insert(collection_name=collection_name, data=vector.dict())
-        return JSONResponse(content={"message": f"Vector(s) successfully created."}, status_code=201)
+        
+        return JSONResponse(content={"message": "Vector(s) successfully created."}, status_code=201)
     
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)
@@ -150,6 +159,21 @@ def find_chunks_by_version(project_id, document_id, version):
         sort_by="chunk_id"
     )   
 
+ 
+
+def pdf_to_text(file: UploadFile):
+    try:
+        pdf_data = io.BytesIO(file.file.read())
+        pdf_document = pymupdf.open(stream=pdf_data, filetype="pdf")
+        text = ""
+        for page_num in range(len(pdf_document)):
+            page = pdf_document.load_page(page_num)
+            text += page.get_text()
+        return text
+    
+    except Exception as e:
+        return JSONResponse(content={"error processing pdf": str(e)}, status_code=400)   
+
 def summarize_document(project_id, document_id, version, prompt = 'Summarize the following document:'):
     chunks = find_chunks_by_version(project_id, document_id, version)
     
@@ -185,8 +209,8 @@ def answer_question(prompt, project_id, document_id, version):
 
 def run_prompt(query, context):
     api_url = "https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct"
-    # FIXME replace with actual token
-    headers = {"Authorization": f"Bearer xxxxxxxxxxxxxxxxxx"}
+    api_token = os.environ['DOCUBOT_ACCESS_TOKEN']
+    headers = {"Authorization": f"Bearer {api_token}"}
 
     prompt = f"<|begin_of_text|><|start_header_id|>user<|end_header_id|>\n{query}\n\n{context}<|eot_id|>\n<|start_header_id|>assistant<|end_header_id|>"
     data = {
@@ -208,4 +232,3 @@ def clean_response(response_text):
     clean_text = re.sub(r'\*\*Background\*\*(.*)', '', clean_text)
     clean_text = re.sub(r'\*\*(.*?)\*\*', '', clean_text)
     return clean_text
-

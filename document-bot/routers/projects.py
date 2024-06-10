@@ -37,6 +37,10 @@ class VectorFilterRequest(BaseModel):
     upper_budget: int
     type: str
 
+class VectorIterateRequest(BaseModel):
+    name: str
+    budget: int
+    
 class Vector(BaseModel):
     id: int
     name: str
@@ -119,11 +123,7 @@ async def delete(vector_id: int):
 @router.post("/api/v1/collections/projects/search")
 async def search(search_req: VectorSearchRequest):
     try:
-        vector_data = hybrid_search(search_req.search_term)
-        if vector_data:
-            return vector_data
-        else:
-            return JSONResponse(content={"message": "No vectors match the search."}, status_code=204)
+        return hybrid_search(search_req.search_term)
         
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)   
@@ -132,18 +132,22 @@ async def search(search_req: VectorSearchRequest):
 @router.post("/api/v1/collections/projects/filter")
 async def filter(filter_req: VectorFilterRequest):
     try:
-        vector_data = filter_search(filter_req.description, 
+        return filter_search(filter_req.description, 
                                     filter_req.lower_budget, 
                                     filter_req.upper_budget, 
                                     filter_req.type)
-        if vector_data:
-            return vector_data
-        else:
-            return JSONResponse(content={"message": "No vectors match the search."}, status_code=204)
-        
     except Exception as e:
-        return JSONResponse(content={"error": str(e)}, status_code=500)   
-
+        return JSONResponse(content={"error": str(e)}, status_code=500)  
+     
+# FEAT: COMPLEX QUERY 4 - Iterated Vector Search with filters 
+@router.post("/api/v1/collections/projects/iterate")
+async def iterate(iterate_req: VectorIterateRequest):
+    try:
+        return iterator_filter(iterate_req.name, iterate_req.budget)
+    
+    except Exception as e:
+        return JSONResponse(content={"error": str(e)}, status_code=500) 
+    
 def hybrid_search(search_term: str):
     searh_vector = embed_search(search_term)
 
@@ -192,3 +196,29 @@ def filter_search(description, lower_budget, upper_budget, type):
         output_fields=['name', 'description', 'budget', 'type'],
         limit=10
     )
+
+def iterator_filter(name, budget):    
+    name_vector = embed_search(name)
+
+    collection.load()
+    iterator = collection.query_iterator(
+        data=name_vector,
+        anns_field="name_emb",    
+        batch_size=5,
+        limit=15, 
+        expr=f'budget < {budget} and type == "INTERNAL"',
+        output_fields=["name", "description", "type"]
+    )   
+
+    results = []
+    while True:
+        result = iterator.next()
+
+        if len(result) == 0:
+            iterator.close()
+            break;
+        
+        for x in range(len(result)):
+            results.append(result[x])
+
+    return results
