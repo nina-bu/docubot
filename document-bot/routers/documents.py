@@ -151,16 +151,6 @@ async def find(ask_req: VectorAskRequest):
     except Exception as e:
         return JSONResponse(content={"error": str(e)}, status_code=500)   
 
-def find_chunks_by_version(project_id, document_id, version):
-    return client.query(
-        collection_name=collection_name,
-        filter=f'project_id == {project_id} and document_id == {document_id} and version == {version}',
-        output_fields=["name", "chunk_id", "text"],
-        sort_by="chunk_id"
-    )   
-
- 
-
 def pdf_to_text(file: UploadFile):
     try:
         pdf_data = io.BytesIO(file.file.read())
@@ -174,7 +164,32 @@ def pdf_to_text(file: UploadFile):
     except Exception as e:
         return JSONResponse(content={"error processing pdf": str(e)}, status_code=400)   
 
-def summarize_document(project_id, document_id, version, prompt = 'Summarize the following document:'):
+def find_documents_by_project(project_id):
+    query_results = client.query(
+        collection_name=collection_name,
+        filter=f'project_id == {project_id}',
+        output_fields=["project_id", "document_id","name", 'version'],
+    )
+
+    distinct_combos = set()
+    documents = []
+    for result in query_results:
+        combo = (result['project_id'], result['document_id'], result['version'])
+        if combo not in distinct_combos:
+            distinct_combos.add(combo)
+            documents.append(result)
+
+    return documents
+
+def find_chunks_by_version(project_id, document_id, version):
+    return client.query(
+        collection_name=collection_name,
+        filter=f'project_id == {project_id} and document_id == {document_id} and version == {version}',
+        output_fields=["chunk_id", "text"],
+        sort_by="chunk_id"
+    )   
+
+def summarize_document(project_id, document_id, version, prompt = 'Shortly summarize the following document:'):
     chunks = find_chunks_by_version(project_id, document_id, version)
     
     if len(chunks) == 0:

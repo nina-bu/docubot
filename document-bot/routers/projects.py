@@ -2,7 +2,7 @@ from configs.env import PROJECT_COLLECTION_NAME
 from fastapi import APIRouter
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-from pymilvus import AnnSearchRequest, Collection, WeightedRanker, connections
+from pymilvus import AnnSearchRequest, Collection, WeightedRanker
 from services.embedding_service import embed_insert, embed_search
 from services.milvus_service import client
 
@@ -180,7 +180,7 @@ def hybrid_search(search_term: str):
     res = collection.hybrid_search(
         reqs, 
         rerank,
-        limit=2, 
+        limit=3, 
         output_fields=['name', 'description', 'budget', 'type']
     )
     return res
