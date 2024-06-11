@@ -1,41 +1,201 @@
 ProjectId,Name,Description,Budget,Type
-1,Clean Air Initiative,A project aimed at reducing air pollution in urban areas by promoting electric vehicles and green infrastructure.,1000000,EXTERNAL
-2,Water Conservation Program,An internal initiative to reduce water usage within the organization through efficiency measures and awareness campaigns.,500000,INTERNAL
-3,Sustainable Agriculture Project,A collaboration with local farmers to promote sustainable farming practices and reduce the use of harmful pesticides.,750000,EXTERNAL
-4,Energy Efficiency Upgrade,Upgrading the organization's facilities to improve energy efficiency and reduce carbon footprint.,1200000,INTERNAL
-5,Recycling Awareness Campaign,A public campaign to increase awareness about the importance of recycling and proper waste management.,600000,EXTERNAL
-6,Green Office Initiative,Implementing green practices in office operations to minimize environmental impact.,800000,INTERNAL
-7,Biodiversity Protection Program,A project focused on protecting local biodiversity through conservation efforts and habitat restoration.,900000,EXTERNAL
-8,Sustainable Transportation Plan,Developing a plan to encourage the use of sustainable transportation options among employees.,1100000,INTERNAL
-9,Renewable Energy Project,Aiming to increase the use of renewable energy sources within the organization.,1300000,INTERNAL
-10,Community Clean-up Drive,Organizing community clean-up events to maintain clean and healthy environments.,400000,EXTERNAL
-11,Eco-Friendly Packaging,Promoting the use of eco-friendly packaging materials.,700000,EXTERNAL
-12,Tree Planting Initiative,Organizing tree planting events to improve local green spaces.,900000,INTERNAL
-13,Waste Reduction Strategy,Developing strategies to reduce waste generation.,600000,EXTERNAL
-14,Sustainable Supply Chain,Ensuring the supply chain practices are sustainable.,1100000,INTERNAL
-15,Green Building Certification,Achieving green building certifications for facilities.,800000,EXTERNAL
-16,Climate Change Education,Educating the community about climate change.,1000000,INTERNAL
-17,Nemo Life,Monitoring and improving water quality.,500000,EXTERNAL
-18,Carbon Offsetting Program,Implementing carbon offsetting initiatives.,1200000,INTERNAL
-19,Energy-Saving Campaign,Campaigning to encourage energy-saving habits.,700000,EXTERNAL
-20,Green Commuting Challenge,Encouraging green commuting options.,900000,INTERNAL
-21,Eco Volunteer Network,Establishing a network of volunteers to participate in various environmental conservation activities.,600000,EXTERNAL
-22,Wildlife Corridor Restoration,Restoring and maintaining wildlife corridors to support animal migration and biodiversity.,1100000,EXTERNAL
-23,Zero Waste Office,Implementing zero waste practices in the workplace.,800000,INTERNAL
-24,Green Energy Workshop,Organizing workshops to educate employees about renewable energy and energy conservation.,1000000,INTERNAL
-25,Urban Farming Project,Promoting urban farming initiatives to increase local food production.,500000,EXTERNAL
-26,Plastic-Free Challenge,Encouraging employees to reduce plastic use through a month-long challenge.,1200000,INTERNAL
-27,Sustainable Event Planning,Developing guidelines for planning environmentally-friendly events.,700000,INTERNAL
-28,Nature Education Program,Providing nature education programs for local schools and communities.,900000,EXTERNAL
-29,Composting Initiative,Setting up composting systems within the organization.,600000,INTERNAL
-30,Green Tech Adoption,Adopting green technologies to reduce the environmental footprint.,1100000,EXTERNAL
-31,Eco Ambassador Program,Training employees to become eco ambassadors and promote sustainability within the organization.,800000,INTERNAL
-32,Environmental Impact Assessment,Conducting assessments to understand and mitigate the organization's environmental impact.,1000000,INTERNAL
-33,Sustainable Tourism Promotion,Promoting sustainable tourism practices in collaboration with local businesses.,500000,EXTERNAL
-34,Paperless Office Campaign,Encouraging the transition to a paperless office environment.,1200000,INTERNAL
-35,Green Commute Incentives,Providing incentives for employees to use sustainable commuting options.,700000,INTERNAL
-36,Renewable Energy Fair,Organizing a fair to showcase renewable energy solutions and innovations.,900000,EXTERNAL
-37,Eco-Friendly Product Line,Developing a line of eco-friendly products.,600000,EXTERNAL
-38,Habitat Restoration Project,Restoring natural habitats to support local wildlife.,1100000,EXTERNAL
-39,Sustainable Fashion Show,Hosting a fashion show to promote sustainable clothing.,800000,EXTERNAL
-40,Green Infrastructure Development,Developing eco-friendly infrastructure projects to improve environmental sustainability.,1500000,EXTERNAL
+1,Clean Air Initiative,"A comprehensive project aimed at reducing air pollution in urban areas by promoting the widespread adoption of electric vehicles, implementing green infrastructure such as solar-powered streetlights and green roofs, and conducting public awareness campaigns on sustainable commuting options and air quality monitoring.",1000000,EXTERNAL
+2,Water Conservation Program,"An internally driven initiative focused on reducing water usage within the organization through the implementation of advanced water-saving technologies, conducting regular water audits to identify areas for improvement, and organizing educational workshops for employees on water conservation practices both at work and at home.",500000,INTERNAL
+3,Sustainable Agriculture Project,"A collaborative effort with local farmers to promote regenerative agriculture practices, including crop rotation, organic farming methods, and the use of natural fertilizers to improve soil health and biodiversity. The project also aims to reduce the reliance on harmful pesticides and chemical inputs.",750000,EXTERNAL
+4,Energy Efficiency Upgrade,"A strategic initiative to enhance energy efficiency across the organization's facilities by implementing energy-saving technologies such as LED lighting, smart HVAC systems, and building automation systems. The project also includes employee training on energy conservation best practices and conducting energy audits to identify areas for improvement.",1200000,INTERNAL
+5,Recycling Awareness Campaign,"A multifaceted public campaign focused on increasing awareness about recycling practices and proper waste management. The campaign includes educational workshops, community clean-up events, and partnerships with local recycling facilities.",600000,EXTERNAL
+6,Green Office Initiative,"An initiative aimed at implementing green practices in office operations to minimize environmental impact. This includes reducing paper usage, implementing recycling programs, and promoting energy-saving habits among employees.",800000,INTERNAL
+7,Biodiversity Protection Program,"A project focused on protecting local biodiversity through conservation efforts, habitat restoration, and wildlife monitoring. The program also includes educational initiatives to raise awareness about the importance of biodiversity conservation.",900000,EXTERNAL
+8,Sustainable Transportation Plan,"Developing a comprehensive plan to encourage the use of sustainable transportation options among employees, such as carpooling, biking, and public transit. The plan also includes incentives for adopting green commuting practices.",1100000,INTERNAL
+9,Renewable Energy Project,"Aiming to increase the use of renewable energy sources within the organization by implementing solar panels, wind turbines, and energy storage systems. The project also includes employee training on renewable energy technologies.",1300000,INTERNAL
+10,Community Clean-up Drive,"Organizing community clean-up events to maintain clean and healthy environments. The drive involves volunteers, educational activities, and partnerships with local government agencies for waste disposal.",400000,EXTERNAL
+11,Eco-Friendly Packaging,"Promoting the use of eco-friendly packaging materials through partnerships with suppliers, customer education campaigns, and internal policies to reduce packaging waste.",700000,EXTERNAL
+12,Tree Planting Initiative,"Organizing tree planting events to improve local green spaces and combat deforestation. The initiative involves community participation, educational programs, and partnerships with environmental organizations.",900000,INTERNAL
+13,Waste Reduction Strategy,"Developing and implementing strategies to reduce waste generation across all organizational processes. The strategy includes waste audits, recycling programs, and employee engagement.",600000,EXTERNAL
+14,Sustainable Supply Chain,"Ensuring the supply chain practices are sustainable by sourcing materials responsibly, optimizing transportation routes, and collaborating with suppliers on environmental initiatives.",1100000,INTERNAL
+15,Green Building Certification,"Working towards achieving green building certifications for facilities through energy-efficient designs, sustainable materials, and eco-friendly building practices.",800000,EXTERNAL
+16,Climate Change Education,"Educating employees and the community about climate change science, impacts, and actions individuals can take. The education program includes workshops, seminars, and outreach events.",1000000,INTERNAL
+17,New Life,"Monitoring and improving water quality through data collection, analysis, and implementing water conservation measures. The project involves partnerships with environmental agencies and community engagement.",500000,EXTERNAL
+18,Carbon Offsetting Program,"Implementing carbon offsetting initiatives to mitigate the organization's carbon footprint through reforestation, renewable energy projects, and sustainable land management practices.",1200000,INTERNAL
+19,Energy-Saving Campaign,"Campaigning to encourage energy-saving habits by promoting the use of energy-efficient appliances, implementing smart energy management practices, and raising awareness about the importance of reducing energy and water consumption for a sustainable future.",700000,EXTERNAL
+20,Green Commuting Challenge,"Encouraging employees to use green commuting options such as walking, biking, or using public transportation through incentives, infrastructure improvements, and educational campaigns.",900000,INTERNAL
+21,Eco Volunteer Network,"Establishing a network of volunteers to participate in various environmental conservation activities such as clean-ups, tree planting, and wildlife monitoring. The network promotes community engagement and environmental stewardship.",600000,EXTERNAL
+22,Wildlife Corridor Restoration,"Restoring and maintaining wildlife corridors to support animal migration and biodiversity. The project involves habitat restoration, wildlife monitoring, and community involvement.",1100000,EXTERNAL
+23,Zero Waste Office,"Implementing zero waste practices in the workplace through waste reduction strategies, recycling programs, and employee education. The initiative aims to minimize landfill waste and promote sustainable resource management.",800000,INTERNAL
+24,Green Energy Workshop,"Organizing workshops to educate employees about renewable energy, energy conservation, and sustainable practices. The workshops cover topics such as solar energy, wind power, and green building design.",1000000,INTERNAL
+25,Urban Farming Project,"Promoting urban farming initiatives to increase local food production, reduce food miles, and educate communities about sustainable agriculture practices. The project includes community gardens, farmer training, and outreach programs.",500000,EXTERNAL
+26,Plastic-Free Challenge,"Encouraging employees to reduce plastic use through a month-long challenge that promotes alternatives such as reusable containers, compostable packaging, and plastic-free lifestyle choices.",1200000,INTERNAL
+27,Sustainable Event Planning,"Developing guidelines and best practices for planning environmentally-friendly events, including waste reduction strategies, sustainable catering options, and carbon offsetting measures.",700000,INTERNAL
+28,Nature Education Program,"Providing nature education programs for local schools and communities to foster environmental awareness, appreciation for nature, and conservation stewardship. The program includes field trips, workshops, and educational resources.",900000,EXTERNAL
+29,Composting Initiative,"Setting up composting systems within the organization to divert organic waste from landfills, reduce greenhouse gas emissions, and produce nutrient-rich compost for landscaping and gardening.",600000,INTERNAL
+30,Green Tech Adoption,"Adopting green technologies such as energy-efficient appliances, renewable energy systems, and smart building automation to reduce environmental impact and improve resource efficiency.",1100000,EXTERNAL
+31,Eco Ambassador Program,"Training employees to become eco ambassadors and promote sustainability within the organization through initiatives such as waste reduction, energy conservation, and eco-friendly practices.",800000,INTERNAL
+32,Environmental Impact Assessment,"Conducting assessments to understand and mitigate the organization's environmental impact across operations, supply chain, and product lifecycle. The assessments inform sustainability strategies and improvement plans.",1000000,INTERNAL
+33,Sustainable Tourism Promotion,"Promoting sustainable tourism practices by partnering with local businesses, offering eco-friendly travel options, and educating tourists about responsible travel behaviors.",500000,EXTERNAL
+34,Paperless Office Campaign,"Encouraging the transition to a paperless office environment through digital document management, electronic communications, and employee training on paper-saving practices. The campaign aims to reduce paper consumption, waste, and environmental impact.",1200000,INTERNAL
+35,Green Commute Incentives,"Providing incentives for employees to use sustainable commuting options such as carpooling, biking, or using public transportation. The incentives may include subsidies, rewards, or flexible work arrangements.",700000,INTERNAL
+36,Renewable Energy Fair,"Organizing a fair to showcase renewable energy solutions and innovations, educate the public about renewable technologies, and promote renewable energy adoption. The fair includes exhibits, demonstrations, and expert panels.",900000,EXTERNAL
+37,Eco-Friendly Product Line,"Developing a line of eco-friendly products that meet sustainability criteria such as biodegradability, recyclability, and reduced environmental footprint. The product line promotes eco-conscious consumer choices and sustainable manufacturing practices.",600000,EXTERNAL
+38,Habitat Restoration Project,"Restoring natural habitats such as wetlands, forests, and grasslands to support biodiversity, ecosystem services, and wildlife conservation. The project involves habitat assessments, restoration planning, and community engagement.",1100000,EXTERNAL
+39,Sustainable Fashion Show,"Hosting a fashion show to showcase sustainable clothing brands, eco-friendly fabrics, and ethical fashion practices. The show raises awareness about sustainable fashion choices and promotes a shift towards a more sustainable fashion industry.",800000,EXTERNAL
+40,Green Infrastructure Development,"Developing eco-friendly infrastructure projects such as green buildings, renewable energy installations, and sustainable urban developments. The projects aim to enhance environmental sustainability, reduce carbon footprint, and improve quality of life.",1500000,EXTERNAL
+41,Eco-Friendly Office Supplies,"Promoting the use of eco-friendly office supplies such as recycled paper, biodegradable pens, and energy-efficient equipment. The initiative aims to reduce waste and promote sustainable procurement practices.",800000,INTERNAL
+42,Green Roof Installation,"Installing green roofs on buildings to improve energy efficiency, reduce stormwater runoff, and enhance urban biodiversity. The project involves roof assessments, vegetation planting, and maintenance.",1000000,EXTERNAL
+43,Water Recycling System,"Implementing a water recycling system to reuse wastewater for non-potable purposes such as irrigation, cooling, and flushing. The system reduces water consumption and wastewater discharge.",1200000,INTERNAL
+44,Environmental Art Installation,"Creating environmental art installations that raise awareness about environmental issues, inspire conservation action, and beautify public spaces. The installations may use recycled materials and sustainable design principles.",700000,EXTERNAL
+45,Sustainable Business Certification,"Pursuing certifications such as LEED, B Corp, or ISO 14001 to demonstrate commitment to sustainability, responsible business practices, and environmental stewardship.",900000,INTERNAL
+46,Green Data Center,"Building a green data center with energy-efficient servers, cooling systems, and renewable energy integration. The data center reduces energy consumption and carbon emissions.",1100000,EXTERNAL
+47,Carbon Footprint Tracking,"Implementing a system to track and manage the organization's carbon footprint by analyzing emissions data, setting reduction targets, and implementing mitigation strategies.",800000,INTERNAL
+48,Ocean Conservation Initiative,"Supporting ocean conservation efforts through partnerships with marine conservation organizations, research projects, and public awareness campaigns about marine ecosystems.",1500000,EXTERNAL
+49,Sustainable Packaging Design,"Designing eco-friendly packaging solutions that minimize waste, use recyclable materials, and reduce environmental impact throughout the product lifecycle.",1000000,INTERNAL
+50,Green IT Infrastructure,"Optimizing IT infrastructure for energy efficiency, virtualization, and cloud computing to reduce power consumption and carbon emissions.",1200000,EXTERNAL
+51,Community Garden Project,"Creating community gardens to promote local food production, community engagement, and education about sustainable gardening practices.",800000,INTERNAL
+52,Renewable Energy Microgrids,"Implementing renewable energy microgrids to power specific areas or facilities, reducing reliance on traditional energy sources and promoting energy independence.",1100000,EXTERNAL
+53,Sustainable Waste Management,"Developing a comprehensive waste management strategy that includes waste reduction, recycling, composting, and proper disposal practices.",900000,INTERNAL
+54,Green Certification Training,"Providing training programs for employees to obtain green certifications such as LEED Green Associate, Green Business Certification, or Sustainable Supply Chain Management Certification.",700000,EXTERNAL
+55,Environmental Monitoring System,"Installing sensors and monitoring systems to track environmental parameters such as air quality, water quality, and energy consumption for proactive environmental management.",1000000,INTERNAL
+56,Biodiversity Conservation Fund,"Establishing a fund to support biodiversity conservation projects, habitat restoration, and wildlife protection initiatives.",1200000,EXTERNAL
+57,Sustainable Agriculture Training,"Offering training programs for farmers on sustainable agriculture techniques, organic farming practices, and soil conservation methods.",800000,INTERNAL
+58,Green Fleet Management,"Optimizing fleet operations for fuel efficiency, vehicle electrification, and alternative fuel adoption to reduce carbon emissions and environmental impact.",1100000,EXTERNAL
+59,Climate Resilience Planning,"Developing resilience plans to address climate change impacts such as extreme weather events, sea-level rise, and ecosystem disruptions.",900000,INTERNAL
+60,Environmental Education Center,"Establishing an environmental education center to provide educational programs, workshops, and resources on sustainability, conservation, and environmental stewardship.",700000,EXTERNAL
+61,Sustainable Fisheries Management,"Implementing sustainable fisheries management practices such as fishery assessments, stock monitoring, and fishing regulations to promote sustainable seafood production.",1000000,INTERNAL
+62,Green Procurement Policy,"Adopting a green procurement policy that prioritizes environmentally friendly products, suppliers with sustainable practices, and ethical sourcing.",1200000,EXTERNAL
+63,Eco-Tourism Development,"Promoting eco-tourism initiatives that support local communities, preserve natural habitats, and educate tourists about environmental conservation.",800000,INTERNAL
+64,Green Innovation Incubator,"Establishing an innovation hub for green technology startups, providing resources, mentorship, and funding for sustainable innovation.",1100000,EXTERNAL
+65,Corporate Social Responsibility Reporting,"Preparing annual reports on corporate social responsibility activities, sustainability performance, and environmental impact metrics.",900000,INTERNAL
+66,Climate Adaptation Research,"Conducting research on climate change adaptation strategies, resilience planning, and mitigation measures for vulnerable communities and ecosystems.",700000,EXTERNAL
+67,Sustainable Forest Management,"Implementing sustainable forestry practices such as reforestation, forest conservation, and responsible logging to protect forest ecosystems and biodiversity.",1000000,INTERNAL
+68,Green Building Retrofit,"Retrofitting existing buildings with energy-efficient systems, insulation, and renewable energy technologies to improve energy performance and reduce environmental footprint.",1200000,EXTERNAL
+69,Plastic Pollution Cleanup,"Organizing clean-up campaigns to remove plastic pollution from beaches, waterways, and natural habitats, and promoting alternatives to single-use plastics.",800000,INTERNAL
+70,Climate Action Advocacy,"Engaging in advocacy efforts for climate action policies, renewable energy incentives, and environmental regulations at local, national, and international levels.",1100000,EXTERNAL
+71,Solar Energy Adoption,"Implementing solar energy systems to generate clean and renewable electricity, reduce carbon emissions, and achieve energy independence for the organization.",1000000,EXTERNAL
+72,Community Recycling Center,"Establishing a community recycling center to facilitate recycling of various materials, educate the public on proper recycling practices, and promote waste reduction.",1200000,INTERNAL
+73,Green Business Network,"Creating a network of green businesses to collaborate on sustainability initiatives, share best practices, and support each other's environmental goals.",900000,EXTERNAL
+74,Climate Change Mitigation Fund,"Establishing a fund to invest in projects that mitigate climate change impacts, such as renewable energy installations, carbon offsetting initiatives, and sustainable infrastructure.",1100000,INTERNAL
+75,Environmental Justice Advocacy,"Advocating for environmental justice, equity, and inclusivity in environmental decision-making processes, policies, and resource allocation.",700000,EXTERNAL
+76,Sustainable Urban Planning,"Developing sustainable urban planning strategies, including green spaces, walkable communities, public transit systems, and mixed-use developments.",1000000,INTERNAL
+77,Green Supply Chain Management,"Implementing green supply chain practices such as sustainable sourcing, supplier partnerships, and supply chain transparency to reduce environmental impact.",1200000,EXTERNAL
+78,Climate Resilient Infrastructure,"Building climate-resilient infrastructure that can withstand extreme weather events, flooding, and other climate-related risks while minimizing environmental impact.",900000,INTERNAL
+79,Environmental Education Campaign,"Launching an environmental education campaign to raise awareness, inspire action, and empower individuals to make sustainable choices.",1100000,EXTERNAL
+80,Sustainable Energy Management,"Implementing strategies for sustainable energy management, including energy conservation, renewable energy adoption, and energy-efficient practices.",800000,INTERNAL
+81,Green Job Creation Program,"Creating green job opportunities in sectors such as renewable energy, environmental conservation, sustainable agriculture, and green technology.",1200000,EXTERNAL
+82,Climate Change Adaptation Plan,"Developing a comprehensive plan to adapt to climate change impacts, including sea-level rise, extreme weather events, and changes in ecosystems.",900000,INTERNAL
+83,Green Chemistry Research,"Conducting research on green chemistry principles, sustainable materials, and environmentally friendly manufacturing processes.",1100000,EXTERNAL
+84,Climate Action Collaboration,"Collaborating with other organizations, governments, and stakeholders on climate action initiatives, policies, and projects.",700000,INTERNAL
+85,Environmental Policy Advocacy,"Advocating for stronger environmental policies, regulations, and incentives to address environmental challenges and promote sustainability.",1000000,EXTERNAL
+86,Sustainable Tourism Certification,"Developing a certification program for sustainable tourism businesses that meet environmental, social, and economic sustainability criteria.",1200000,INTERNAL
+87,Climate Smart Agriculture,"Promoting climate-smart agriculture practices such as conservation farming, agroforestry, and sustainable irrigation to enhance resilience and reduce emissions.",900000,EXTERNAL
+88,Green Building Design Competition,"Organizing a design competition for green buildings, sustainable architecture, and eco-friendly construction practices.",1100000,INTERNAL
+89,Climate Change Impact Assessment,"Conducting assessments to understand the impacts of climate change on communities, ecosystems, infrastructure, and natural resources.",700000,EXTERNAL
+90,Sustainable Fisheries Certification,"Obtaining certifications such as Marine Stewardship Council (MSC) for sustainable fisheries management and responsible seafood sourcing.",1000000,INTERNAL
+91,Environmental Conservation Grants,"Providing grants for environmental conservation projects, habitat restoration, biodiversity protection, and wildlife conservation.",1200000,EXTERNAL
+92,Carbon Neutral Certification,"Achieving carbon neutrality by reducing emissions, offsetting remaining emissions, and implementing carbon reduction strategies.",900000,INTERNAL
+93,Green Technology Innovation,"Supporting research and development of green technologies such as clean energy, energy storage, sustainable materials, and waste management solutions.",1100000,EXTERNAL
+94,Climate Change Education Program,"Implementing a comprehensive education program on climate change science, impacts, solutions, and individual actions.",700000,INTERNAL
+95,Green Business Certification,"Obtaining certifications such as Green Business Certification (GBC) for sustainable business practices, resource efficiency, and environmental stewardship.",1000000,EXTERNAL
+96,Sustainable Transportation Infrastructure,"Investing in sustainable transportation infrastructure such as bike lanes, electric vehicle charging stations, and public transit upgrades.",1200000,INTERNAL
+97,Climate Action Task Force,"Establishing a task force to develop and implement climate action plans, set emissions reduction targets, and monitor progress.",900000,EXTERNAL
+98,Environmental Impact Reduction,"Implementing measures to reduce the organization's environmental footprint, including energy efficiency improvements, waste reduction, and resource conservation.",1100000,INTERNAL
+99,Sustainable Development Goals (SDGs) Integration,"Aligning organizational strategies, operations, and initiatives with the United Nations Sustainable Development Goals (SDGs) for comprehensive sustainability.",700000,EXTERNAL
+100,Climate Action Investment Fund,"Creating an investment fund to finance climate action projects, renewable energy initiatives, and sustainable development ventures.",1000000,INTERNAL
+101,Sustainable Energy Access,"Providing access to sustainable energy solutions such as solar panels, clean cooking stoves, and microgrids in underserved communities.",1200000,EXTERNAL
+102,Green Infrastructure Investment,"Investing in green infrastructure projects such as green roofs, permeable pavement, and urban green spaces to enhance resilience and sustainability.",900000,INTERNAL
+103,Environmental Justice Training,"Offering training programs and workshops on environmental justice, equity, and inclusion in environmental decision-making processes.",1100000,EXTERNAL
+104,Sustainable Tourism Development,"Developing sustainable tourism destinations, practices, and experiences that conserve natural resources and benefit local communities.",700000,INTERNAL
+105,Green Building Retrofit Program,"Implementing a program to retrofit existing buildings with energy-efficient systems, renewable energy, and green building materials.",1000000,EXTERNAL
+106,Climate Action Financing,"Providing financing options and incentives for climate action projects, renewable energy investments, and green technologies.",1200000,INTERNAL
+107,Environmental Education Curriculum,"Developing an environmental education curriculum for schools, colleges, and community centers on sustainability topics.",900000,EXTERNAL
+108,Green Jobs Training Initiative,"Launching a training initiative to prepare individuals for green jobs in sectors such as renewable energy, conservation, and sustainability.",1100000,INTERNAL
+109,Sustainable Agriculture Certification,"Obtaining certifications for sustainable agriculture practices such as organic farming, soil conservation, and water efficiency.",700000,EXTERNAL
+110,Climate Change Adaptation Strategy,"Developing strategies to adapt to climate change impacts such as sea-level rise, extreme weather, and changing ecosystems.",1000000,INTERNAL
+111,Green Technology Incubator,"Establishing an incubator for green technology startups to develop and commercialize sustainable innovations.",1200000,EXTERNAL
+112,Climate Action Awareness Campaign,"Launching a public awareness campaign on climate change, sustainability, and individual actions for a greener future.",900000,INTERNAL
+113,Environmental Policy Research,"Conducting research on environmental policies, regulations, and governance for informed decision-making and advocacy.",1100000,EXTERNAL
+114,Green Building Standards Compliance,"Ensuring compliance with green building standards and certifications such as LEED, BREEAM, and Green Globes.",700000,INTERNAL
+115,Climate Action Volunteer Program,"Establishing a volunteer program for climate action projects, community clean-ups, and environmental education initiatives.",1000000,EXTERNAL
+116,Sustainable Transportation Solutions,"Implementing sustainable transportation solutions such as bike-sharing programs, electric vehicle incentives, and carpooling initiatives.",1200000,INTERNAL
+117,Climate Resilience Training,"Providing training on climate resilience planning, risk assessment, and adaptation strategies for organizations and communities.",900000,EXTERNAL
+118,Green Procurement Practices,"Implementing green procurement practices such as sourcing eco-friendly products, reducing packaging waste, and supporting sustainable suppliers.",1100000,INTERNAL
+119,Climate Change Impact Mitigation,"Implementing measures to mitigate climate change impacts, including flood protection, coastal defenses, and ecosystem restoration.",700000,EXTERNAL
+120,Environmental Sustainability Reporting,"Reporting on environmental sustainability performance, initiatives, and progress towards sustainability goals.",1000000,INTERNAL
+121,Sustainable Packaging Solutions,"Developing sustainable packaging solutions such as biodegradable materials, recyclable packaging, and reduced packaging waste.",1200000,EXTERNAL
+122,Climate Action Policy Advocacy,"Advocating for stronger climate action policies, renewable energy targets, and emissions reduction commitments.",900000,INTERNAL
+123,Green Building Design Guidelines,"Developing green building design guidelines and best practices for architects, engineers, and construction professionals.",1100000,EXTERNAL
+124,Climate Change Resilience Planning,"Developing resilience plans for communities, infrastructure, and ecosystems to adapt to climate change impacts.",700000,INTERNAL
+125,Sustainable Tourism Certification Program,"Creating a certification program for sustainable tourism businesses and destinations.",1000000,EXTERNAL
+126,Climate Action Research,"Conducting research on climate change mitigation strategies, renewable energy technologies, and sustainable development practices.",1200000,INTERNAL
+127,Green Office Certification,"Obtaining certifications for green office practices such as energy efficiency, waste reduction, and sustainable procurement.",900000,EXTERNAL
+128,Climate Change Education Initiative,"Launching an education initiative on climate change science, impacts, solutions, and sustainable behaviors.",1100000,INTERNAL
+129,Sustainable Infrastructure Investment,"Investing in sustainable infrastructure projects such as green building construction, eco-friendly transportation systems, and sustainable urban development.",700000,EXTERNAL
+130,Climate Action Partnership,"Forming partnerships with other organizations, governments, and stakeholders for collaborative climate action.",1000000,INTERNAL
+131,Green Building Retrofit Program,"Implementing a program to retrofit existing buildings with energy-efficient systems, renewable energy, and green building materials.",1200000,EXTERNAL
+132,Climate Action Financing,"Providing financing options and incentives for climate action projects, renewable energy investments, and green technologies.",900000,INTERNAL
+133,Environmental Education Curriculum,"Developing an environmental education curriculum for schools, colleges, and community centers on sustainability topics.",1100000,EXTERNAL
+134,Green Jobs Training Initiative,"Launching a training initiative to prepare individuals for green jobs in sectors such as renewable energy, conservation, and sustainability.",700000,INTERNAL
+135,Sustainable Agriculture Certification,"Obtaining certifications for sustainable agriculture practices such as organic farming, soil conservation, and water efficiency.",1000000,EXTERNAL
+136,Climate Change Adaptation Strategy,"Developing strategies to adapt to climate change impacts such as sea-level rise, extreme weather, and changing ecosystems.",1200000,INTERNAL
+137,Green Technology Incubator,"Establishing an incubator for green technology startups to develop and commercialize sustainable innovations.",900000,EXTERNAL
+138,Climate Action Awareness Campaign,"Launching a public awareness campaign on climate change, sustainability, and individual actions for a greener future.",1100000,INTERNAL
+139,Environmental Policy Research,"Conducting research on environmental policies, regulations, and governance for informed decision-making and advocacy.",700000,EXTERNAL
+140,Green Building Standards Compliance,"Ensuring compliance with green building standards and certifications such as LEED, BREEAM, and Green Globes.",1000000,INTERNAL
+141,Climate Action Volunteer Program,"Establishing a volunteer program for climate action projects, community clean-ups, and environmental education initiatives.",1200000,EXTERNAL
+142,Sustainable Transportation Solutions,"Implementing sustainable transportation solutions such as bike-sharing programs, electric vehicle incentives, and carpooling initiatives.",900000,INTERNAL
+143,Climate Resilience Training,"Providing training on climate resilience planning, risk assessment, and adaptation strategies for organizations and communities.",1100000,EXTERNAL
+144,Green Procurement Practices,"Implementing green procurement practices such as sourcing eco-friendly products, reducing packaging waste, and supporting sustainable suppliers.",700000,INTERNAL
+145,Climate Change Impact Mitigation,"Implementing measures to mitigate climate change impacts, including flood protection, coastal defenses, and ecosystem restoration.",1000000,EXTERNAL
+146,Environmental Sustainability Reporting,"Reporting on environmental sustainability performance, initiatives, and progress towards sustainability goals.",1200000,INTERNAL
+147,Sustainable Packaging Solutions,"Developing sustainable packaging solutions such as biodegradable materials, recyclable packaging, and reduced packaging waste.",900000,EXTERNAL
+148,Climate Change Mitigation Projects,"Implementing projects to mitigate climate change impacts, such as reforestation, renewable energy installations, and carbon capture technologies.",1100000,INTERNAL
+149,Green Building Certification Program,"Developing a certification program for green buildings to recognize and promote environmentally sustainable construction practices.",700000,EXTERNAL
+150,Climate Action Awareness Program,"Launching an awareness program to educate communities about climate change, sustainable living, and conservation efforts.",1000000,INTERNAL
+151,Sustainable Transport Infrastructure,"Investing in sustainable transport infrastructure like bike lanes, electric vehicle charging stations, and pedestrian-friendly urban design.",1200000,EXTERNAL
+152,Climate Resilience Planning Initiative,"Developing strategies and plans to increase resilience to climate change impacts like sea-level rise and extreme weather events.",900000,INTERNAL
+153,Green Procurement Policy Implementation,"Implementing policies to prioritize environmentally friendly products, suppliers with sustainable practices, and ethical sourcing.",1100000,EXTERNAL
+154,Climate Change Adaptation Strategies,"Developing and implementing strategies to adapt to climate change impacts on ecosystems, communities, and infrastructure.",700000,INTERNAL
+155,Sustainable Agriculture Education,"Providing education and training on sustainable farming practices, soil conservation, and water management.",1000000,EXTERNAL
+156,Climate Action Advocacy Campaign,"Running campaigns to advocate for stronger climate action policies, renewable energy adoption, and emissions reduction targets.",1200000,INTERNAL
+157,Green Innovation Incubator Program,"Establishing programs to incubate and support startups focused on developing green technologies and sustainable solutions.",900000,EXTERNAL
+158,Climate Change Mitigation Fund,"Creating funds to invest in projects that reduce greenhouse gas emissions, promote renewable energy, and support sustainable development.",1100000,INTERNAL
+159,Environmental Education Outreach,"Engaging in outreach activities to schools, communities, and businesses to promote environmental education and awareness.",700000,EXTERNAL
+160,Green Building Retrofit Initiative,"Initiating programs to retrofit existing buildings with energy-efficient systems, green materials, and sustainable technologies.",1000000,INTERNAL
+161,Climate Resilience Training Program,"Offering training programs to build resilience to climate change impacts for communities, businesses, and government agencies.",1200000,EXTERNAL
+162,Sustainable Transport Promotion,"Promoting sustainable transportation options such as public transit, carpooling, biking, and walking.",900000,INTERNAL
+163,Climate Action Policy Development,"Participating in the development of climate action policies, regulations, and initiatives at local, national, and international levels.",1100000,EXTERNAL
+164,Green Supply Chain Management System,"Implementing systems to manage and optimize the supply chain for sustainability, including green sourcing and logistics.",700000,INTERNAL
+165,Climate Change Adaptation Planning,"Developing plans to adapt to climate change impacts on infrastructure, water resources, agriculture, and coastal areas.",1000000,EXTERNAL
+166,Sustainable Agriculture Certification Program,"Establishing certification programs for sustainable agriculture practices, organic farming, and regenerative agriculture.",1200000,INTERNAL
+167,Climate Action Awareness Initiatives,"Launching initiatives to raise awareness about climate change, environmental sustainability, and individual actions.",900000,EXTERNAL
+168,Green Technology Research,"Conducting research on green technologies, renewable energy, sustainable materials, and environmental innovation.",1100000,INTERNAL
+169,Climate Change Mitigation Strategies,"Implementing strategies to reduce greenhouse gas emissions, improve energy efficiency, and transition to renewable energy sources.",700000,EXTERNAL
+170,Environmental Sustainability Education,"Providing education and training on environmental sustainability, conservation, and eco-friendly practices.",1000000,INTERNAL
+171,Sustainable Energy Infrastructure,"Investing in sustainable energy infrastructure such as wind farms, solar parks, and hydroelectric facilities to reduce carbon emissions.",1200000,EXTERNAL
+172,Climate Action Awareness Campaign,"Running campaigns to raise public awareness about climate change, encourage sustainable behaviors, and promote environmental conservation.",900000,INTERNAL
+173,Green Procurement Practices,"Implementing green procurement practices such as sourcing eco-friendly products, reducing waste, and supporting sustainable suppliers.",1100000,EXTERNAL
+174,Climate Change Adaptation Strategies,"Developing strategies to adapt to climate change impacts such as extreme weather events, sea-level rise, and biodiversity loss.",700000,INTERNAL
+175,Sustainable Agriculture Education,"Providing education and training on sustainable farming practices, soil conservation, and water management techniques.",1000000,EXTERNAL
+176,Climate Action Advocacy Campaign,"Running advocacy campaigns to promote climate action policies, renewable energy adoption, and emissions reduction targets.",1200000,INTERNAL
+177,Green Innovation Incubator Program,"Establishing programs to incubate and support startups focused on developing green technologies and sustainable solutions.",900000,EXTERNAL
+178,Climate Change Mitigation Fund,"Creating funds to invest in projects that reduce greenhouse gas emissions, promote renewable energy, and support sustainable development.",1100000,INTERNAL
+179,Environmental Education Outreach,"Engaging in outreach activities to schools, communities, and businesses to promote environmental education and awareness.",700000,EXTERNAL
+180,Green Building Retrofit Initiative,"Initiating programs to retrofit existing buildings with energy-efficient systems, green materials, and sustainable technologies.",1000000,INTERNAL
+181,Climate Resilience Training Program,"Offering training programs to build resilience to climate change impacts for communities, businesses, and government agencies.",1200000,EXTERNAL
+182,Sustainable Transport Promotion,"Promoting sustainable transportation options such as public transit, carpooling, biking, and walking.",900000,INTERNAL
+183,Climate Action Policy Development,"Participating in the development of climate action policies, regulations, and initiatives at local, national, and international levels.",1100000,EXTERNAL
+184,Green Supply Chain Management System,"Implementing systems to manage and optimize the supply chain for sustainability, including green sourcing and logistics.",700000,INTERNAL
+185,Climate Change Adaptation Planning,"Developing plans to adapt to climate change impacts on infrastructure, water resources, agriculture, and coastal areas.",1000000,EXTERNAL
+186,Sustainable Agriculture Certification Program,"Establishing certification programs for sustainable agriculture practices, organic farming, and regenerative agriculture.",1200000,INTERNAL
+187,Climate Action Awareness Initiatives,"Launching initiatives to raise awareness about climate change, environmental sustainability, and individual actions.",900000,EXTERNAL
+188,Green Technology Research,"Conducting research on green technologies, renewable energy, sustainable materials, and environmental innovation.",1100000,INTERNAL
+189,Climate Change Mitigation Strategies,"Implementing strategies to reduce greenhouse gas emissions, improve energy efficiency, and transition to renewable energy sources.",700000,EXTERNAL
+190,Environmental Sustainability Education,"Providing education and training on environmental sustainability, conservation, and eco-friendly practices.",1000000,INTERNAL
+191,Sustainable Energy Infrastructure,"Investing in sustainable energy infrastructure such as wind farms, solar parks, and hydroelectric facilities to reduce carbon emissions.",1200000,EXTERNAL
+192,Climate Action Awareness Campaign,"Running campaigns to raise public awareness about climate change, encourage sustainable behaviors, and promote environmental conservation.",900000,INTERNAL
+193,Green Procurement Practices,"Implementing green procurement practices such as sourcing eco-friendly products, reducing waste, and supporting sustainable suppliers.",1100000,EXTERNAL
+194,Climate Change Adaptation Strategies,"Developing strategies to adapt to climate change impacts such as extreme weather events, sea-level rise, and biodiversity loss.",700000,INTERNAL
+195,Sustainable Agriculture Education,"Providing education and training on sustainable farming practices, soil conservation, and water management techniques.",1000000,EXTERNAL
+196,Climate Action Advocacy Campaign,"Running advocacy campaigns to promote climate action policies, renewable energy adoption, and emissions reduction targets.",1200000,INTERNAL
+197,Green Innovation Incubator Program,"Establishing programs to incubate and support startups focused on developing green technologies and sustainable solutions.",900000,EXTERNAL
+198,Climate Change Mitigation Fund,"Creating funds to invest in projects that reduce greenhouse gas emissions, promote renewable energy, and support sustainable development.",1100000,INTERNAL
+199,Environmental Education Outreach,"Engaging in outreach activities to schools, communities, and businesses to promote environmental education and awareness.",700000,EXTERNAL
+200,Green Building Retrofit Initiative,"Initiating programs to retrofit existing buildings with energy-efficient systems, green materials, and sustainable technologies.",1000000,INTERNAL
