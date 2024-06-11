@@ -40,13 +40,15 @@ class PDF(FPDF):
         self.set_font('Arial', '', 12)
         self.multi_cell(0, 5, f"{project.description}", 0, 1)
         self.multi_cell(0, 5, f"Budget: {project.budget} EUR", 0, 1)
-        self.ln(10)
+        self.ln(7.5)
 
     def add_document_section(self, document):
+        self.set_left_margin(20)
         self.set_font('Arial', 'B', 12)
         self.multi_cell(0, 10, f"{document.name} [V{document.version}]", 0, 1)
         self.set_font('Arial', '', 12)
         self.multi_cell(0, 5, f"Summary: {document.summary}", 0, 1)
+        self.set_left_margin(10)
         self.ln(5)
 
     def add_paragraph(self, content):

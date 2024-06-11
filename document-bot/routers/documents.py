@@ -189,15 +189,15 @@ def find_chunks_by_version(project_id, document_id, version):
         sort_by="chunk_id"
     )   
 
-def summarize_document(project_id, document_id, version, prompt = 'Shortly summarize the following document:'):
+def summarize_document(project_id, document_id, version, prompt = 'Summarize the following document:'):
     chunks = find_chunks_by_version(project_id, document_id, version)
     
     if len(chunks) == 0:
         raise NoVersionFound(f"No vectors found for version {version}, document ID {document_id}, and project ID {project_id}")
 
-    context = "\n\n".join(chunk['text'] for chunk in chunks)
+    context = "".join(chunk['text'] for chunk in chunks)
 
-    summary = run_prompt(prompt, context)
+    summary = run_bert_prompt(prompt, context)
     return summary
 
 def find_answer_by_version(question, project_id, document_id, version):
@@ -217,17 +217,17 @@ def answer_question(prompt, project_id, document_id, version):
     if len(chunks) == 0:
         raise NoVersionFound(f"No vectors found for version {version}, document ID {document_id}, and project ID {project_id}")
 
-    context = "\n\n".join(chunk[0]['entity']['text'] for chunk in chunks)
+    context = "".join(chunk[0]['entity']['text'] for chunk in chunks)
 
-    summary = run_prompt(prompt, context)
+    summary = run_llama_prompt(prompt, context)
     return summary
 
-def run_prompt(query, context):
-    api_url = "https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct"
+def run_bert_prompt(query, context):
+    api_url = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn"
     api_token = os.environ['DOCUBOT_ACCESS_TOKEN']
     headers = {"Authorization": f"Bearer {api_token}"}
 
-    prompt = f"<|begin_of_text|><|start_header_id|>user<|end_header_id|>\n{query}\n\n{context}<|eot_id|>\n<|start_header_id|>assistant<|end_header_id|>"
+    prompt = f"{query}\n{context}"
     data = {
         "inputs": prompt,
         "parameters": {"max_length": 500, "min_length": 30, "do_sample": False}
@@ -235,11 +235,29 @@ def run_prompt(query, context):
 
     response = requests.post(api_url, headers=headers, json=data)
     if response.status_code == 200:
+        return response.json()[0]['summary_text']
+        
+    raise Exception(f"API request failed with status code {response.status_code}: {response.text}")
+    
+def run_llama_prompt(query, context):
+    api_url = "https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3-8B-Instruct"
+    api_token = os.environ['DOCUBOT_ACCESS_TOKEN']
+    headers = {"Authorization": f"Bearer {api_token}"}
+
+    prompt = f"{query}\nContext: {context}"
+    message = f"<|begin_of_text|><|start_header_id|>system<|end_header_id|>'Answer based on context.'<|eot_id|><|start_header_id|>user<|end_header_id|>{prompt}<|eot_id|><|start_header_id|>assistant<|end_header_id|>"
+    data = {
+        "inputs": message,
+        "parameters": {"max_seq_len ": 2048, "temperature": 0.1, "max_batch_size": 12}
+    }
+
+    response = requests.post(api_url, headers=headers, json=data)
+    if response.status_code == 200:
         generated_text = response.json()[0]['generated_text']
         response_text = generated_text.split('<|end_header_id|>\n\n')[1]
         return clean_response(response_text)
-    else:
-        raise Exception(f"API request failed with status code {response.status_code}: {response.text}")
+        
+    raise Exception(f"API request failed with status code {response.status_code}: {response.text}")
 
 def clean_response(response_text):
     clean_text = re.sub(r'\n\d\.', '', response_text)
