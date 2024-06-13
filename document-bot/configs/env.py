@@ -17,3 +17,4 @@ DOCUMENT_FILE_PATH = "../data/documents.csv"
 LECTURES_FILE_PATH = "../data/lectures.csv"
 
 KAFKA_BROKER = 'localhost:9092'
+# KAFKA_BROKER = 'kafka'

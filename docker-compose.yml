@@ -65,23 +65,23 @@ services:
     networks:
       - default
 
-  docubot-service:
-    image: python:3.9-slim
-    build:
-     context: ./document-bot
-     dockerfile: Dockerfile
-    volumes:
-      - ./document-bot/main.py:/app/main.py:ro
-      - ./document-bot/requirements.txt:/app/requirements.txt:ro
-    ports:
-      - "8000:8000"
-    command: uvicorn main:app --host 0.0.0.0 --port 8000
-    depends_on:
-      - etcd
-      - minio
-      - standalone
-    networks:
-      - default
+  # docubot-service:
+  #   image: python:3.9-slim
+  #   build:
+  #    context: ./document-bot
+  #    dockerfile: Dockerfile
+  #   volumes:
+  #     - ./document-bot/main.py:/app/main.py:ro
+  #     - ./document-bot/requirements.txt:/app/requirements.txt:ro
+  #   ports:
+  #     - "8000:8000"
+  #   command: uvicorn main:app --host 0.0.0.0 --port 8000
+  #   depends_on:
+  #     - etcd
+  #     - minio
+  #     - standalone
+  #   networks:
+  #     - default
 
   orchestrator-service:
     build: './orchestrator-service'
@@ -93,7 +93,7 @@ services:
     environment:
       - KAFKA_BROKER=kafka:29092
     ports:
-      - 8080:8080
+      - 8081:8081
 
   kafka:
     container_name: kafka

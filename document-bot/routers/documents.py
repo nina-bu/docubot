@@ -1,7 +1,7 @@
-from datetime import datetime
 import io
 import os
 import re
+from datetime import datetime
 
 import pymupdf
 import requests
@@ -10,9 +10,10 @@ from fastapi import APIRouter, File, Form, UploadFile
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from services.embedding_service import chunk, embed_insert, embed_search
-from services.milvus_service import client
-from services.event_service import Event, EEventSource, ESagaStatus, History, to_json
+from services.event_service import (EEventSource, ESagaStatus, Event, History,
+                                    to_json)
 from services.kafka_producer import create_producer
+from services.milvus_service import client
 
 router = APIRouter()
 
