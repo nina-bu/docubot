@@ -1,3 +1,4 @@
+from datetime import datetime
 import io
 import os
 import re
@@ -10,6 +11,8 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from services.embedding_service import chunk, embed_insert, embed_search
 from services.milvus_service import client
+from services.event_service import Event, EEventSource, ESagaStatus, History, to_json
+from services.kafka_producer import create_producer
 
 router = APIRouter()
 
@@ -265,3 +268,68 @@ def clean_response(response_text):
     clean_text = re.sub(r'\*\*Background\*\*(.*)', '', clean_text)
     clean_text = re.sub(r'\*\*(.*?)\*\*', '', clean_text)
     return clean_text
+
+
+def saga_create(
+    event: Event
+):
+    try:
+        if not event.payload.text:
+            return JSONResponse(content={"message": "Either 'text' or 'file' must be provided"}, status_code=400)        
+
+        for chunk_id, chunk_txt in chunk(event.payload.text):
+            vector = Vector(
+                project_id=event.payload.projectId,
+                document_id=event.payload.documentId,
+                name=event.payload.name,
+                version=event.payload.version,
+                text=chunk_txt,
+                chunk_id=chunk_id,
+                txt_emb=embed_insert(chunk_txt)
+            )
+            client.insert(collection_name=collection_name, data=vector.dict())
+
+        
+
+        handle_success(event)
+        
+    
+    except Exception as e:
+        handle_error(event, str(e))
+
+def handle_success(event: Event):
+    producer = create_producer()
+
+    event.status = ESagaStatus.SUCCESS
+    event.source = EEventSource.DOCUMENT_BOT_SERVICE
+    event.eventHistory.append(
+        History(
+            source=event.source,
+            status=event.status,
+            message='Document saved successfully',
+            createdAt=datetime.now(),
+        )
+    )
+
+    producer.produce('orchestrator', value=to_json(event))
+    producer.poll(0)
+    producer.flush()
+
+
+def handle_error(event: Event, message: str):
+    producer = create_producer()
+
+    event.status = ESagaStatus.ROLLBACK_PENDING
+    event.source = EEventSource.DOCUMENT_BOT_SERVICE
+    event.eventHistory.append(
+        History(
+            source=event.source,
+            status=event.status,
+            message='Failed to save document ' + message,
+            createdAt=datetime.now(),
+        )
+    )
+
+    producer.produce('orchestrator', value=to_json(event))
+    producer.poll(0)
+    producer.flush()
